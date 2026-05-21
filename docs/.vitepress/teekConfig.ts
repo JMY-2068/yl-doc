@@ -6,10 +6,17 @@ export const teekConfig = defineTeekConfig({
     vpHome: true,
     sidebarTrigger: false,
     author: { name: "一乐", link: "https://www.caimogu.cc/user/1083041.html" },
+    // 图片预览
+    articleAnalyze: {
+        imageViewer: {
+            enabled: false, // 是否启用图片查看器
+            hideOnClickModal: true, // 是否可以通过点击遮罩层关闭预览
+        },
+    },
     // 风险链接
     riskLink: {
         enabled: true,
-        whitelist: ["https://qm.qq.com","https://edit.filtereditor.cn", "https://www.caimogu.cc/user/1083041.html", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843"],
+        whitelist: ["https://qm.qq.com", "https://edit.filtereditor.cn", "https://www.caimogu.cc/user/1083041.html", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843"],
     },
     // 右下角回到顶部配置
     backTop: {
