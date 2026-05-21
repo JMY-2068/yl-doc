@@ -50,7 +50,7 @@ export const teekConfig = defineTeekConfig({
         position: "top", // 位置，top 为导航栏右侧，bottom 为右下角
         // 布局切换配置
         layoutSwitch: {
-            disabled: false, // 禁用布局切换
+            disabled: true, // 禁用布局切换
             defaultMode: "original", // 布局切换的默认模式
             disableHelp: false, // 禁用帮助提示
             disableAnimation: false, // 禁用布局切换动画
