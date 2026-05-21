@@ -1,0 +1,18 @@
+// mark标签样式
+:root {
+    --tk-mark-color: var(--tk-theme-color);
+
+    .dark {
+        --tk-mark-color: var(--tk-theme-color);
+    }
+}
+
+.vp-doc mark {
+    background-color: transparent;
+    border: 1px solid var(--tk-mark-color);
+    border-radius: 32px;
+    color: var(--tk-mark-color);
+    font-size: 15px;
+    margin: 0 3px;
+    padding: 1px 8px
+}

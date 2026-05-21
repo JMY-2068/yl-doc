@@ -1,0 +1,57 @@
+/* 防止页面滚动条出现/消失导致内容区宽度抖动 */
+html {
+  overflow-y: scroll;
+}
+
+/* Sidebar 一级分类字体加大 + 分组间距 */
+.VPSidebar .nav .VPSidebarItem.level-1 > .item > .text {
+  font-size: 17px;
+}
+.VPSidebar .nav .VPSidebarItem.level-1 {
+  margin-top: 10px;
+}
+.VPSidebar .nav .VPSidebarItem.level-1:first-child {
+  margin-top: 0;
+}
+
+/* Sidebar 子项间距加大 */
+.VPSidebar .nav .VPSidebarItem.level-2 {
+  margin-top: 4px;
+}
+
+/* Sidebar 折叠按钮 */
+.sidebar-collapse-btn {
+  float: right;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.sidebar-collapse-btn:hover { opacity: 1; }
+.sidebar-collapse-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* VitePress scoped 样式无法作用于 JS 动态切换的类，在此覆盖 */
+.VPSidebarItem.level-1.collapsed > .items {
+  display: none;
+}
+.VPSidebarItem.level-1.collapsed .sidebar-collapse-btn {
+  transform: rotate(-90deg);
+}
+
+/* Sidebar 选中项 tag 样式 */
+.VPSidebar .VPSidebarItem > .item > .link > .text,
+.VPSidebar .VPSidebarItem > .item > .text {
+  padding: 2px 8px;
+  margin: 0 -8px;
+  border-radius: 6px;
+}
+.VPSidebar .VPSidebarItem.is-active > .item > .link > .text,
+.VPSidebar .VPSidebarItem.is-active > .item > .text {
+  background: color-mix(in srgb, var(--tk-theme-color) 15%, transparent);
+  color: var(--tk-theme-color);
+  font-weight: 600;
+}
