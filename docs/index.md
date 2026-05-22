@@ -76,16 +76,10 @@ onMounted(() => {
   if (!heroTextDom || !textDom) return
   while (heroTextDom.lastChild) heroTextDom.lastChild.remove()
   heroTextDom.append(textDom)
-  getData()
 })
 
 const openQQ = (qq: string) => {
   window.open(qq)
-}
-async function getData(){
-    const res = await fetch('/api/v1/user/count')
-    const data = await res.json()
-    console.log(data)
 }
 </script>
 
