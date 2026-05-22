@@ -9,7 +9,7 @@ outline: false
 
 如果您正在使用一乐过滤并感觉到过滤给你带来了帮助，或者是想支持我继续开发，您可以通过如下任意方式支持我：
 
-- Star 并分享 [一乐过滤文档](https://github.com/Kele-Bingtang/vitepress-theme-teek) 🚀
+- Star 并分享 [一乐过滤文档](https://github.com/JMY-2068/yl-doc) 🚀
 - 通过以下二维码进行赞助，打赏作者一杯茶 🍵
 
 谢谢！❤️
