@@ -16,8 +16,8 @@ hero:
           text: 去网站编辑
           link: https://edit.filtereditor.cn/
         - theme: alt
-          text: 一起编写文档
-          link: https://github.com/JMY-2068/yl-doc
+          text: 下载懒过滤人包
+          link: /download
 
 features:
     - icon: 🎮
