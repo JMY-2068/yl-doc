@@ -4,7 +4,7 @@ import { version } from "vitepress-theme-teek/es/version"
 export const teekConfig = defineTeekConfig({
     teekHome: false,
     vpHome: true,
-    sidebarTrigger: false,
+    sidebarTrigger: true,
     author: { name: "一乐", link: "https://www.caimogu.cc/user/1083041.html" },
     // 图片预览
     articleAnalyze: {
@@ -92,18 +92,6 @@ export const teekConfig = defineTeekConfig({
             defaultValue: true, // 聚光灯默认开关状态
         },
     },
-    // 赞赏功能配置
-    // appreciation: {
-    //     position: "doc-after", // 赞赏位置
-    //     // 赞赏配置
-    //     options: {
-    //         icon: "weChatPay", // 赞赏图标，内置 weChatPay 和 alipay
-    //         expandTitle: "打赏支持", // 展开标题，支持 HTML
-    //         collapseTitle: "下次一定", // 折叠标题，支持 HTML
-    //         content: `<img src='/teek-logo-large.png'>`, // 赞赏内容，支持 HTML
-    //         expand: false, // 是否默认展开，默认 false
-    //     },
-    // },
     // 公告配置
     notice: {
         enabled: true, // 是否启用公告功能
