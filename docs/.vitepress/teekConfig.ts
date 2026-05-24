@@ -76,7 +76,7 @@ export const teekConfig = defineTeekConfig({
                         { label: "珊瑚粉", value: "coral-pink", color: "#ff6b6b" },
                         { label: "天空蓝", value: "sky-blue", color: "#00bbf9" },
                         { label: "皇家蓝", value: "royal-blue", color: "#2563EB" },
-                        { label: "石板灰", value: "slate-gray", color: "#708090" },
+                        { label: "静谧黄", value: "silent-yellow", color: "#E8B576" },  
                         { label: "樱花粉", value: "pink", color: "#f15bb5" },
                         { label: "薄荷绿", value: "mint-green", color: "#10B981" },
                         { label: "落日橙", value: "orange-red", color: "#ff9e6b" },

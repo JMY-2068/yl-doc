@@ -2,25 +2,28 @@
 
 /* Hero 图片大小 */
 .VPHero .VPImage {
-  max-width: 250px;
-  max-height: 250px;
-}
-.VPHero .VPImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-@media (max-width: 768px) {
-  .VPHero .VPImage {
-    max-width: 120px;
-    max-height: 120px;
-  }
+    max-width: 250px;
+    max-height: 250px;
 }
 
-/* Hero 图片发光效果 */
+.VPHero .VPImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .VPHero .VPImage {
+        max-width: 120px;
+        max-height: 120px;
+    }
+}
+
+
 :root {
-  --vp-home-hero-image-background-image: linear-gradient(135deg, #FFE0B2 25%, #FFCC80 50%, #FFB74D 75%);
-  --vp-home-hero-image-filter: blur(72px);
+    /* Hero 图片发光效果 */
+    --vp-home-hero-image-background-image: linear-gradient(135deg, #FFE0B2 25%, #FFCC80 50%, #FFB74D 75%);
+    --vp-home-hero-image-filter: blur(72px);
 }
 
 body {
@@ -29,26 +32,31 @@ body {
 }
 
 .dark {
-  --vp-home-hero-image-background-image: linear-gradient(135deg, #8B6914 25%, #B8860B 50%, #DAA520 75%);
+    --vp-home-hero-image-background-image: linear-gradient(135deg, #8B6914 25%, #B8860B 50%, #DAA520 75%);
 }
 
 /* 明暗切换：switch 样式改为图标按钮 */
 .VPSwitchAppearance {
-  width: 22px !important;
+    width: 22px !important;
 }
 
 .VPSwitchAppearance .check {
-  transform: none !important;
+    transform: none !important;
 }
 
 /* 防止页面切换时 aside 抖动 */
 .VPDoc .content-container {
-  min-height: 80vh;
-  transition: min-height 0.2s ease;
+    min-height: 80vh;
+    transition: min-height 0.2s ease;
 }
 
 /* 标题色为主色 */
 .VPDoc h1,
 .VPDoc h2 {
-  color:var(--tk-theme-color) !important;
+    color: var(--tk-theme-color) !important;
+}
+
+/* 自定义容器标题字体大小 */
+.custom-block-title {
+    font-size: 16px;
 }
