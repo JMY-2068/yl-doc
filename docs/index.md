@@ -40,6 +40,10 @@ features:
       details: 一键分享你的过滤配置和音效包，热门过滤随时下载使用
 ---
 
+## 🎉 已有 <span class="user-count-num" id="user-count">0</span> 位流放者加入
+
+点击上方[去网站编辑](https://edit.filtereditor.cn/)按钮立即加入
+
 ## 💡 过滤交流群<Badge type="tip" text="点击加群" />
 
 <div class="qr-group">
@@ -66,7 +70,7 @@ features:
 </div>
 
 <script setup lang="ts">
-import { onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useData } from "vitepress"
 
 const { frontmatter } = useData()
@@ -81,6 +85,29 @@ onMounted(() => {
 const openQQ = (qq: string) => {
   window.open(qq)
 }
+
+const userCount = ref(0)
+
+function animateNumber(el: HTMLElement, target: number, duration = 2000) {
+  const startTime = performance.now()
+  const tick = (now: number) => {
+    const progress = Math.min((now - startTime) / duration, 1)
+    const eased = 1 - Math.pow(1 - progress, 3)
+    el.textContent = Math.floor(eased * target).toLocaleString()
+    if (progress < 1) requestAnimationFrame(tick)
+  }
+  requestAnimationFrame(tick)
+}
+
+onMounted(async () => {
+  try {
+    const res = await fetch("/api/v1/user/count")
+    const data = await res.json()
+    const count = data.data ?? data ?? 0
+    const el = document.getElementById("user-count")
+    if (el) animateNumber(el, count)
+  } catch {}
+})
 </script>
 
 <span id="hero-text" style="display: inline-block; position: relative">
@@ -91,6 +118,11 @@ const openQQ = (qq: string) => {
 </span>
 
 <style scoped>
+    .user-count-num {
+        color: var(--vp-c-brand);
+        font-weight: bold;
+        font-size: 1.3em;
+    }
     .qr-group {
         display: flex;
         gap: 60px;
