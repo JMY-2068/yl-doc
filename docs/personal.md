@@ -16,7 +16,7 @@ outline: false
 
 |                                   微信赞赏                                   |                               微信                               |                            支付宝                            |
 | :--------------------------------------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="/qrcode/wechat.jpg"  width=180> | <img src="/qrcode/wechat2.png"  width=180> | <img src="/qrcode/alipay.jpg"  width=180> |
+| <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/wechat.webp"  width=180> | <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/wechat2.webp"  width=180> | <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/alipay.webp"  width=180> |
 
 您的赞助将帮助 <mark>一乐</mark>：
 

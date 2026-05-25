@@ -6,7 +6,7 @@ hero:
     text: 'POE过滤编辑工具'
     tagline: ✨高效、灵活的过滤器编辑与管理工具
     image:
-        src: /logo.png
+        src: /logo.webp
         alt: 一乐过滤
     actions:
         - theme: brand
@@ -49,23 +49,23 @@ features:
 <div class="qr-group">
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/r5NmIj4XTM')">
          过滤一群:663896689
-        <img src="/qrcode/qqq1.png" class="qq" />
+        <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq1.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/utSaj5dfNu')">
          过滤二群:225616278
-        <img src="/qrcode/qqq2.png" class="qq" />
+        <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq2.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/wT190TKwJq')">
          过滤三群:621055124
-        <img src="/qrcode/qqq3.png" class="qq" />
+        <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq3.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/KAsjF2w0A8')">
          过滤四群:495451331
-        <img src="/qrcode/qqq4.png" class="qq" />
+        <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq4.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/mrL90bDCLe')">
          过滤五群:476921399
-        <img src="/qrcode/qqq5.png" class="qq" />
+        <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq5.webp" class="qq" />
     </div>
 </div>
 
