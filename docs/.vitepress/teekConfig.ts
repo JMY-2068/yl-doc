@@ -1,8 +1,14 @@
 import { defineTeekConfig } from "vitepress-theme-teek/config"
 import { version } from "vitepress-theme-teek/es/version"
+import mdCustomAttrs from "./plugins/mdCustomAttrs"
 
 export const teekConfig = defineTeekConfig({
     teekHome: false,
+    markdown: {
+        config: (md) => {
+            md.use(mdCustomAttrs)
+        },
+    },
     vpHome: true,
     sidebarTrigger: true,
     author: { name: "一乐", link: "https://www.caimogu.cc/user/1083041.html" },

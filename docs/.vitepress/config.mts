@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { teekConfig } from "./teekConfig"
-import mdCustomAttrs from "./plugins/mdCustomAttrs"
 
 export default defineConfig({
     extends: teekConfig,
@@ -38,9 +37,6 @@ export default defineConfig({
     ],
     markdown: {
         lineNumbers: true,
-        config: (md) => {
-            md.use(mdCustomAttrs)
-        },
         image: {
             lazyLoading: true,
         },
