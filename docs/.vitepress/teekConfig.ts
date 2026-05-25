@@ -12,6 +12,10 @@ export const teekConfig = defineTeekConfig({
     vpHome: true,
     sidebarTrigger: true,
     author: { name: "一乐", link: "https://www.caimogu.cc/user/1083041.html" },
+    // 是否显示最近更新文章
+    articleUpdate: {
+        enabled: false,
+    },
     // 图片预览
     articleAnalyze: {
         imageViewer: {
