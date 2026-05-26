@@ -20,7 +20,7 @@ export default defineConfig({
     lastUpdated: true,
     lang: "zh-CN",
     head: [
-        ["link", { rel: "icon", type: "image/png", href: "/logo.png" }],
+        ["link", { rel: "icon", type: "image/webp", href: "/logo.webp" }],
         ["meta", { property: "og:type", content: "website" }],
         ["meta", { property: "og:locale", content: "zh-CN" }],
         ["meta", { property: "og:title", content: "一乐过滤" }],
@@ -49,7 +49,7 @@ export default defineConfig({
         },
     },
     themeConfig: {
-        logo: "/logo.png",
+        logo: "/logo.webp",
         darkModeSwitchLabel: "主题",
         sidebarMenuLabel: "菜单",
         returnToTopLabel: "返回顶部",
