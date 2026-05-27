@@ -16,7 +16,7 @@ hero:
           text: 去网站编辑
           link: https://edit.filtereditor.cn/
         - theme: alt
-          text: 下载懒过滤人包
+          text: 下载懒人过滤包
           link: /download
 
 features:
