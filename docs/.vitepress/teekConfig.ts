@@ -26,7 +26,7 @@ export const teekConfig = defineTeekConfig({
     // 风险链接
     riskLink: {
         enabled: true,
-        whitelist: ["https://qm.qq.com", "https://edit.filtereditor.cn", "https://www.caimogu.cc", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843"],
+        whitelist: ["https://qm.qq.com", "https://edit.filtereditor.cn", "https://www.caimogu.cc", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843","https://ug.9game.cn"],
     },
     // 右下角回到顶部配置
     backTop: {

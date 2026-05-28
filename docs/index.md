@@ -40,9 +40,13 @@ features:
       details: 一键分享你的过滤配置和音效包，热门过滤随时下载使用
 ---
 
+
 ## 🎉 已有 <span class="user-count-num" id="user-count">0</span> 位流放者加入
 
 点击上方[去网站编辑](https://edit.filtereditor.cn/)按钮立即加入
+
+## 🎉 输入口令<span class="user-count-num">【一乐】</span> 领3天会员，我自己一直也在用biubiu加速器，强烈推荐大家都去用~
+[![biubiu加速器 no-preview](https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/biubiu.webp)](https://ug.9game.cn/absolute/?adRaTid=64dc8d3a886e230f12b39030&ch=BTF_1672&gch=BTF_1672)
 
 ## 💡 过滤交流群<Badge type="tip" text="点击加群" />
 
