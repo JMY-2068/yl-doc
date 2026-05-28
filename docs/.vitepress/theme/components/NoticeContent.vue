@@ -4,7 +4,10 @@ const namespace = "notice";
 
 <template>
     <div :class="namespace">
-        全新一乐过滤文档上线了 🎉🎉🎉!!!
+        <p>1.全新一乐过滤文档上线了 🎉🎉🎉!!!</p>
+        <p>
+            2.国际服先行版过滤已更新，点击下载懒人包去下载!!!
+        </p>
     </div>
 </template>
 
@@ -17,7 +20,6 @@ const namespace = "notice";
     }
 
     p {
-        text-align: center;
         font-size: 14px;
         padding: 10px 0;
     }
