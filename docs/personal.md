@@ -29,6 +29,17 @@ outline: false
 
 ❤️ 感谢支持过滤的朋友，您的每一份帮助都让过滤变得更好！
 
+## 感谢名单
+
+| 昵称 | -- | 个人主页 |
+| :---: | :---: | :--- |
+| 抖音 小结巴 | 录制专版游戏音效 | [抖音](https://v.douyin.com/ENx-T8bBb38) |
+| 抖音 呆哈拿 | 录制专版游戏音效 | [抖音](https://v.douyin.com/xWYKLucq7Os) |
+| B站 这有一只黑猫 | 核对游戏物品信息,提供过滤建议 | [B站](https://space.bilibili.com/5865294) |
+| 踩蘑菇 娱乐 | 核对游戏物品信息,提供过滤建议 | [踩蘑菇](https://www.caimogu.cc/user/609856.html) |
+| B站 吴茕无尽 | 帮忙测试过滤 | [B站](https://space.bilibili.com/59374338) |
+| Q群 随性 | 核对游戏物品信息,提供过滤建议 |
+
 
 <style scoped>
 .vp-doc table:focus-visible {
