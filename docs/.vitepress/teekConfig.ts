@@ -64,7 +64,7 @@ export const teekConfig = defineTeekConfig({
             defaultMode: "original", // 布局切换的默认模式
             disableHelp: false, // 禁用帮助提示
             disableAnimation: false, // 禁用布局切换动画
-            defaultDocMaxWidth: 90, // 内容布局最大宽度的默认百分比，仅限 0-100
+            defaultDocMaxWidth: 85, // 内容布局最大宽度的默认百分比，仅限 0-100
             disableDocMaxWidthHelp: false, // 禁用帮助提示
             defaultPageMaxWidth: 95, // 页面布局最大宽度的默认百分比，仅限 0-100
             disablePageMaxWidthHelp: false, // 禁用帮助提示

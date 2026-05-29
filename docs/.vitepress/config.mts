@@ -79,13 +79,7 @@ export default defineConfig({
             { text: "过滤语法", link: "/syntax/intro", activeMatch: "/03.过滤语法/" },
             { text: "过滤下载", link: "/download", activeMatch: "/04.过滤下载/" },
             { text: "过滤音效", link: "/sound", activeMatch: "/05.过滤音效/" },
-            // {
-            //     text: "相关链接",
-            //     items: [
-            //         { text: "一乐过滤编辑网站", link: "https://edit.filtereditor.cn/" },
-            //         { text: "官方过滤语法文档", link: "https://poe.game.qq.com/item-filter/about" },
-            //     ],
-            // },
+            { text: "POE网址导航", link: "/guide", activeMatch: "/06.POE网址导航/" },
             { text: "✨ 赞赏", link: "/personal/", activeMatch: "/personal" },
         ],
         socialLinks: [
