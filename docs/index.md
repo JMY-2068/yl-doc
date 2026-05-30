@@ -52,23 +52,23 @@ features:
 
 <div class="qr-group">
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/r5NmIj4XTM')">
-         过滤一群:663896689
+         一群:663896689(活跃)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq1.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/utSaj5dfNu')">
-         过滤二群:225616278
+         二群:225616278(一般)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq2.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/wT190TKwJq')">
-         过滤三群:621055124
+         三群:621055124(一般)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq3.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/KAsjF2w0A8')">
-         过滤四群:495451331
+         四群:495451331(活跃)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq4.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/mrL90bDCLe')">
-         过滤五群:476921399
+         五群:476921399(一般)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq5.webp" class="qq" />
     </div>
 </div>
