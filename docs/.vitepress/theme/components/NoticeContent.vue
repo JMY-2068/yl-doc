@@ -8,6 +8,9 @@ const namespace = "notice";
         <p>
             2.国际服先行版过滤已更新，点击下载懒人包去下载!!!
         </p>
+        <p>
+            3.过滤没声音是游戏问题,等官方修复
+        </p>
     </div>
 </template>
 
