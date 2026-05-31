@@ -410,6 +410,12 @@ sidebar: false
   img: https://icons.duckduckgo.com/ip2/annulfilter.com.ico
   badge: 过滤编辑
   badgeType: warning
+- name: Demon Filter
+  desc: 界面比较简洁,轻量自定义的过滤编辑网站
+  link: https://demonfilter.com/
+  img: https://icons.duckduckgo.com/ip2/demonfilter.com.ico
+  badge: 过滤编辑
+  badgeType: warning
 ```
 :::
 
