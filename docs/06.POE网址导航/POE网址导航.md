@@ -275,6 +275,12 @@ sidebar: false
   img: https://icons.duckduckgo.com/ip2/pob.cool.ico
   badge: POB网页版
   badgeType: warning
+- name: PoB Cool 汉化版
+  desc: POB网页版在线规划-汉化版
+  link: https://pobzh.cn/
+  img: https://icons.duckduckgo.com/ip2/pob.cool.ico
+  badge: POB网页汉化版
+  badgeType: warning
 - name: POB1+2汉化-草樣年華
   desc: 草樣年華²⁰²⁰大佬制作的POB汉化版下载
   link: https://www.caimogu.cc/user/36193.html
