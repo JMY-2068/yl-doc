@@ -5,7 +5,7 @@ const namespace = "notice";
 <template>
     <div :class="namespace">
         <p>
-            6.1热门白装底整理版本已更新，点击下载懒人包去下载!!!
+            6.3远古回响国服正式版过滤已更新,国际服通用，点击下载懒人包去下载!!!
         </p>
     </div>
 </template>
