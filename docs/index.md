@@ -10,14 +10,17 @@ hero:
         alt: 一乐过滤
     actions:
         - theme: brand
-          text: 开始学习吧
+          text: 开始学习
           link: /base/intro
         - theme: alt
-          text: 去网站编辑
+          text: 网站编辑
           link: https://edit.filtereditor.cn/
         - theme: alt
           text: 下载懒人过滤包
           link: /download
+        - theme: alt
+          text: 本地编辑扩展
+          link: /tool/extend
 
 features:
     - icon: 🎮
