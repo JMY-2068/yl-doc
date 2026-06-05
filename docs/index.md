@@ -16,12 +16,12 @@ hero:
           text: 网站编辑
           link: https://edit.filtereditor.cn/
         - theme: alt
-          text: 下载懒人过滤包
-          link: /download
-        - theme: alt
           text: 本地编辑扩展
           link: /tool/extend
-
+        - theme: alt
+          text: 下载懒人过滤包
+          link: /download
+          
 features:
     - icon: 🎮
       title: POE1 & POE2 同步支持

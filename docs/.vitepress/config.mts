@@ -79,7 +79,7 @@ export default defineConfig({
                 { text: "过滤编辑教程", link: "/edit/intro", activeMatch: "/02.过滤编辑/" },
                 { text: "过滤语法教程", link: "/syntax/intro", activeMatch: "/03.过滤语法/" },
             ]},
-            { text: "过滤工具", link: "/tool/extend", activeMatch: "/07.过滤工具/" },
+            { text: "过滤工具", link: "/tool/web-edit", activeMatch: "/07.过滤工具/" },
             { text: "过滤下载", link: "/download", activeMatch: "/04.过滤下载/" },
             { text: "过滤音效", link: "/sound", activeMatch: "/05.过滤音效/" },
             { text: "POE网址导航", link: "/guide", activeMatch: "/06.POE网址导航/" },

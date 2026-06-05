@@ -2,7 +2,7 @@
 const namespace = "notice";
 
 const handleClick = () => {
-    window.location.href = "/tool/extend"
+  window.location.href = '/tool/extend'
 }
 </script>
 
