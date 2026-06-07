@@ -14,6 +14,9 @@ const handleClick = () => {
         <p>
             2.新做了一个Vs Code的本地过滤编辑的增强扩展,适合喜欢文本编辑过滤的,<span @click="handleClick">去了解</span>
         </p>
+        <p>
+            3.编辑网站已支持poe2过滤的暗金和血脉辅助宝石和符文物价排序
+        </p>
     </div>
 </template>
 
