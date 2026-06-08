@@ -9,7 +9,7 @@ const handleClick = () => {
 <template>
     <div :class="namespace">
         <p>
-            1.6.3远古回响国服正式版过滤已更新,国际服通用，点击下载懒人包去下载!!!
+            1.6.8过滤已更新,新增速刷后期档位,国服,国际服通用，点击下载懒人包去下载!!!
         </p>
         <p>
             2.新做了一个Vs Code的本地过滤编辑的增强扩展,适合喜欢文本编辑过滤的,<span @click="handleClick">去了解</span>
