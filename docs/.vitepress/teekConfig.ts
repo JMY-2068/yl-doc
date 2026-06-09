@@ -112,7 +112,7 @@ export const teekConfig = defineTeekConfig({
         reopen: true,
         useStorage: true, // 是是否使用 localStorage 存储公告状态，如：当打开公告弹框后，下次进来则自动打开弹框
         twinkle: false, // 公告图标是否打开闪烁提示
-        position: "top", // 公告弹框出现位置
+        position: "center", // 公告弹框出现位置
     },
     // 站点信息卡片配置
     docAnalysis: {
