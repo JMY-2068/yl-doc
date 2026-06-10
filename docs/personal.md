@@ -39,6 +39,7 @@ outline: false
 | 踩蘑菇 娱乐 | 核对游戏物品信息,提供过滤建议 | [踩蘑菇](https://www.caimogu.cc/user/609856.html) |
 | B站 吴茕无尽 | 帮忙测试过滤 | [B站](https://space.bilibili.com/59374338) |
 | Q群 随性 | 核对游戏物品信息,提供过滤建议 |
+| Q群 Veblen | 积极反馈过滤问题 |  
 
 
 <style scoped>
