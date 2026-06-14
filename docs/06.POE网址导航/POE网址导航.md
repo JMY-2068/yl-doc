@@ -366,7 +366,7 @@ sidebar: false
   badgeType: warning
 - name: PoE Overlay II
   desc: POE2查价器,支持中文,目前国际服用的最多的
-  link: hhttps://www.poeoverlay.com/download/poe-overlay-ii
+  link: https://www.poeoverlay.com/download/poe-overlay-ii
   img: https://www.poeoverlay.com/images/app/logo.webp
   badge: 双服查价
   badgeType: warning
