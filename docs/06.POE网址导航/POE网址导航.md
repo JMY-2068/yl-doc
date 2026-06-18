@@ -310,7 +310,7 @@ sidebar: false
   badgeType: danger
 - name: 国服POE2市集
   desc: 国服POE2官方市集交易网站
-  link: https://poe2.qq.com/trade
+  link: https://poe.qq.com/trade2
   img: https://poecdn.game.qq.com/protected/image/trade/layout/zh_CN/logo2.png?key=rpD3gZplmkZXPZ97OW0kPg
   badge: 市集交易
   badgeType: danger
