@@ -33,6 +33,7 @@ outline: false
 
 | 昵称 | -- | 个人主页 |
 | :---: | :---: | :--- |
+| 踩蘑菇 赏歌勿语 | 早期过滤开发提供大量帮助 | [踩蘑菇](https://www.caimogu.cc/user/657242.html) |
 | 抖音 小结巴 | 录制专版游戏音效 | [抖音](https://v.douyin.com/ENx-T8bBb38) |
 | 抖音 呆哈拿 | 录制专版游戏音效 | [抖音](https://v.douyin.com/xWYKLucq7Os) |
 | B站 这有一只黑猫 | 核对游戏物品信息,提供过滤建议 | [B站](https://space.bilibili.com/5865294) |
