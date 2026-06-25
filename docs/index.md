@@ -10,18 +10,20 @@ hero:
         alt: 一乐过滤
     actions:
         - theme: brand
-          text: 开始学习
+          text: 教程
           link: /base/intro
+        - theme: brand
+          text: 国服物价榜
+          link: https://poecurrency.top/
         - theme: alt
           text: 网站编辑
           link: https://edit.filtereditor.cn/
         - theme: alt
-          text: 下载懒人过滤包
+          text: 下载过滤
           link: /download
         - theme: alt
           text: 国际服订阅
           link: /base/subscribe
-          
 features:
     - icon: 🎮
       title: POE1 & POE2 同步支持
