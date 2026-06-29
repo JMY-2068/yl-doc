@@ -73,13 +73,6 @@ const handleClick = (url?: string) => {
                 </div>
             </div>
         </div>
-
-        <div class="notice-item">
-            <span class="notice-index">3</span>
-            <div class="notice-body">
-                <div class="notice-desc">编辑网站已支持 poe2 过滤的暗金和血脉辅助宝石、符文物价排序</div>
-            </div>
-        </div>
     </div>
 </template>
 
