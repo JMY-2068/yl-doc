@@ -11,6 +11,7 @@ import "./styles/extends/index.scss"
 
 import NoticeContent from "./components/NoticeContent.vue"
 import LayoutWrap from "./components/LayoutWrap.vue"
+import SoundAuthors from "./components/SoundAuthors.vue"
 import { h } from "vue"
 
 export default {
@@ -22,4 +23,7 @@ export default {
                     "teek-notice-content": () => h(NoticeContent)
                 }),
         }),
+    enhanceApp({ app }: { app: import('vue').App }) {
+        app.component('SoundAuthors', SoundAuthors)
+    },
 }
