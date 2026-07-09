@@ -13,7 +13,7 @@ hero:
           text: 教程
           link: /base/intro
         - theme: brand
-          text: 国服物价榜
+          text: 国服物价榜(合作)
           link: https://poecurrency.top/
         - theme: alt
           text: 网站编辑
