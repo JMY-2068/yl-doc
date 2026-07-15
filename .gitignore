@@ -11,3 +11,9 @@ dist-ssr
 
 
 /**/.vitepress/cache/*
+
+# 部署相关(含服务器配置和私钥,禁止入库)
+scripts/deploy_key
+scripts/deploy_key.pub
+scripts/.env.deploy
+*.tar.gz
