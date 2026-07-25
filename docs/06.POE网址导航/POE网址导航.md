@@ -372,7 +372,7 @@ sidebar: false
   badgeType: warning
 - name: 易刷查价器
   desc: 社区查价器-POE1+POE2支持,目前国服用的最多的
-  link: https://www.caimogu.cc/post/1621584.html
+  link: https://efarm-gjf-release.710421059.xyz
   img: /assets/logo/易刷查价器.png
   badge: 双服查价
   badgeType: warning
@@ -434,12 +434,6 @@ sidebar: false
   link: https://www.caimogu.cc/user/35425.html
   img: /assets/logo/功能补丁.ico
   badge: 功能补丁
-  badgeType: warning
-- name: 流放工艺台
-  desc: 打补丁/改字体工具,支持POE1和POE2
-  link: https://www.caimogu.cc/post/2177758.html
-  img: /assets/logo/流放工艺台.ico
-  badge: 打补丁/改字体
   badgeType: warning
 ```
 :::
