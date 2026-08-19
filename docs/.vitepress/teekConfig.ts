@@ -26,7 +26,7 @@ export const teekConfig = defineTeekConfig({
     // 风险链接
     riskLink: {
         enabled: true,
-        whitelist: ["https://qm.qq.com", "https://edit.filtereditor.cn", "https://www.caimogu.cc", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843","https://ug.9game.cn","https://poecurrency.top"],
+        whitelist: ["https://qm.qq.com", "https://edit.filtereditor.cn", "https://www.caimogu.cc", "https://github.com/JMY-2068", "https://space.bilibili.com/20940843","https://ug.9game.cn","https://poecurrency.top","https://v.douyin.com"],
     },
     // 右下角回到顶部配置
     backTop: {
@@ -158,6 +158,11 @@ export const teekConfig = defineTeekConfig({
             icon: "mingcute:bilibili-line",
             name: "哔哩哔哩",
             link: "https://space.bilibili.com/20940843",
+        },
+        {
+            icon: "ic:baseline-tiktok",
+            name: "抖音",
+            link: "https://v.douyin.com/MFb7gqSe648/",
         },
         {
             icon: "mdi:github",
