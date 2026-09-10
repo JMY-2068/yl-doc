@@ -57,23 +57,23 @@ features:
 
 <div class="qr-group">
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/r5NmIj4XTM')">
-         一群:663896689(活跃)
+         663896689(活跃)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq1.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/utSaj5dfNu')">
-         二群:225616278(一般)
+         225616278(下载)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq2.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/wT190TKwJq')">
-         三群:621055124(一般)
+         621055124(下载)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq3.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/KAsjF2w0A8')">
-         四群:495451331(活跃已满)
+         495451331(活跃已满)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq4.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/mrL90bDCLe')">
-         五群:476921399(下载可以优先加)
+         476921399(下载)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq5.webp" class="qq" />
     </div>
 </div>
