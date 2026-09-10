@@ -304,13 +304,13 @@ sidebar: false
 ```yaml
 - name: 国服POE1市集
   desc: 国服POE1官方市集交易网站
-  link: https://poe.qq.com/trade
+  link: https://poe.game.qq.com/trade
   img: /assets/logo/国服POE1市集.png
   badge: 市集交易
   badgeType: danger
 - name: 国服POE2市集
   desc: 国服POE2官方市集交易网站
-  link: https://poe.qq.com/trade2
+  link: https://poe.game.qq.com/trade2
   img: /assets/logo/国服POE2市集.png
   badge: 市集交易
   badgeType: danger
