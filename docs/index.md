@@ -69,11 +69,11 @@ features:
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq3.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/KAsjF2w0A8')">
-         四群:495451331(活跃)
+         四群:495451331(活跃已满)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq4.webp" class="qq" />
     </div>
     <div class="qr-item" @click="openQQ('https://qm.qq.com/q/mrL90bDCLe')">
-         五群:476921399(一般)
+         五群:476921399(下载可以优先加)
         <img src="https://filtereditor-1306253742.cos.ap-shanghai.myqcloud.com/qrcode/qqq5.webp" class="qq" />
     </div>
 </div>
