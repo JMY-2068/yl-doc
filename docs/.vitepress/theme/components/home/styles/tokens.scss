@@ -1,0 +1,80 @@
+// ============================================================
+// 一乐过滤 · 新首页设计 token
+// 风格 A「暗金 ARPG × 编辑器语法」
+//
+// 仅通过 mixin 输出，由 HomePage 挂载到 .yl-home 根元素上，
+// 后代区块只消费 CSS 变量，避免多组件重复注入。
+// ============================================================
+
+@mixin yl-tokens {
+    color-scheme: dark;
+
+    /* —— 底色层级 —— */
+    --yl-bg: #0b0b0f;
+    --yl-bg-elevated: #14141b;
+    --yl-bg-overlay: #1b1b24;
+
+    /* —— 金橙主色（延续站点品牌色）—— */
+    --yl-gold: #e8a23c;
+    --yl-gold-bright: #f4bc5e;
+    --yl-gold-deep: #b87a1e;
+    --yl-gold-glow: rgba(232, 162, 60, 0.35);
+
+    /* —— 边线 —— */
+    --yl-border: rgba(232, 162, 60, 0.16);
+    --yl-border-strong: rgba(232, 162, 60, 0.34);
+    --yl-border-plain: rgba(236, 232, 223, 0.08);
+
+    /* —— 稀有度色板（POE 玩家一眼认出）—— */
+    --yl-rarity-normal: #c8c8c8;
+    --yl-rarity-magic: #8f8fe8;
+    --yl-rarity-rare: #e6d44d;
+    --yl-rarity-unique: #af6025;
+    --yl-currency: #aa9e82;
+
+    /* —— 文字 —— */
+    --yl-text-primary: #ece8df;
+    --yl-text-secondary: #a8a29a;
+    --yl-text-faint: #6b665e;
+
+    /* —— 过滤语法高亮（等宽字体的装饰代码用）—— */
+    --yl-code-keyword: var(--yl-gold);
+    --yl-code-class: var(--yl-rarity-magic);
+    --yl-code-value: var(--yl-rarity-rare);
+    --yl-code-comment: var(--yl-text-faint);
+
+    /* —— 字体（中文用系统栈，后续可再做子集化显示字体）—— */
+    --yl-font-display: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+    --yl-font-body: var(--yl-font-display);
+    --yl-font-mono: "JetBrains Mono", "Cascadia Code", Consolas, "Noto Sans SC", monospace;
+
+    /* —— 间距 / 圆角 / 容器 —— */
+    --yl-space-section: clamp(96px, 12vw, 160px);
+    --yl-space-content: clamp(20px, 4vw, 48px);
+    --yl-container: 1200px;
+    --yl-radius-sm: 4px;
+    --yl-radius: 8px;
+    --yl-radius-lg: 12px;
+
+    /* —— 动效 —— */
+    --yl-dur-fast: 0.25s;
+    --yl-dur: 0.6s;
+    --yl-dur-slow: 1.1s;
+    --yl-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --yl-ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* 内容容器：所有 section 的水平包裹层 */
+@mixin yl-container {
+    width: 100%;
+    max-width: var(--yl-container);
+    margin-inline: auto;
+}
+
+/* 物品名牌卡片：功能卡 / 掉落物演示的通用形态（游戏内掉落名牌的抽象） */
+@mixin yl-item-label {
+    background: color-mix(in srgb, var(--yl-bg-overlay) 88%, transparent);
+    border: 1px solid var(--yl-border);
+    border-radius: var(--yl-radius-sm);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.45);
+}

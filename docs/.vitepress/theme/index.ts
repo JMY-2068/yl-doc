@@ -12,6 +12,7 @@ import "./styles/extends/index.scss"
 import NoticeContent from "./components/NoticeContent.vue"
 import LayoutWrap from "./components/LayoutWrap.vue"
 import SoundAuthors from "./components/SoundAuthors.vue"
+import HomePage from "./components/home/HomePage.vue"
 import { h } from "vue"
 
 export default {
@@ -25,5 +26,6 @@ export default {
         }),
     enhanceApp({ app }: { app: import('vue').App }) {
         app.component('SoundAuthors', SoundAuthors)
+        app.component('HomePage', HomePage)
     },
 }
