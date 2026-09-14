@@ -33,6 +33,18 @@
 
 **✅ 已完成：地基（第 1 块）**，验证全通过（桌面/构建/移动390px无溢出/明暗三态切换）
 
+**✅ 已完成：02 Hero（第 2 块，用户已验收定稿）**
+
+最终结构（`HeroSection.vue`，全部细节以代码为准）：
+
+- **内容纵列**：logo（/logo.webp，圆角+金色投影，入场第一个：缩放淡入）→ 大标题「一乐过滤」（SplitText 拆字逐字上浮）→ 金色渐变下划线（scaleX 从中间展开，4px 带辉光）→ 两行副标题（`国服最好用的过滤编辑工具` 大亮 / `简单、高效、灵活、高度自定义` 小灰）→ 三按钮（金色实底「打开编辑器」→edit.filtereditor.cn；描边「下载懒人包」→/download.html；描边「先看教程」→/base/intro.html）→ 数据带两行（`已有 N 位流放者加入` 17px/数字22px 金色 mono；版本行 `POE1 v3.29.2` `POE2 v2.0.8` = 金色小圆点+16px粗金色mono纯文本，非按钮样式）→ 底部 SCROLL 呼吸线
+- **用户数**：SSR 初始为 0（避免"先显示最大值再归零"闪烁），入场末尾 fetch：`/api/v1/user/count` → 失败回退 `https://api.filtereditor.cn/prod/v1/user/count` → 再失败显示 "160,000+"；成功则 1.6s count-up
+- **背景三件套**：① 锚定光晕（720×440 居中在 logo+标题后方，光有落点不显脏）；② 金色浮尘（JS 注入，桌面16颗/移动8颗，上浮淡出循环）；③ **7 个真实过滤掉落物名牌**（左列4：卡兰德的魔镜/毁灭者之弓/重革腰带/崇高石；右列3：神圣石/贪婪战书/高级混沌石），配色/字号取自用户真实过滤规则（游戏字号×0.32），数据驱动（`leftDrops/rightDrops` 数组：name/text/bg/border/fs/beam/dx/mt/bh）
+- **掉落演出**：入场时依次从上方70px加速砸落（间隔0.22s）→ 落地名牌挤压回弹（elastic）→ 光柱从底部迸发；全部落定后 `tl.eventCallback("onComplete")` 启动待机（左右组漂浮 + 光柱错峰呼吸），避免与入场争夺 opacity
+- **光柱三层结构**：炽亮核心（混白渐变+双辉光）/ 宽柔光锥（clip-path 收窄 + blur + CSS 呼吸）/ 底部椭圆光斑；颜色衍生 `mixWhite()` 计算 --beam-core
+- **散落感**：每颗名牌独立 dx（水平偏移）/mt（垂直错落）/bh（光柱高度），打破垂直堆叠
+- 名牌布局 <960px 隐藏；`prefers-reduced-motion` 不建时间线、不生成粒子，直接静态终态
+
 | 文件 | 作用 |
 |---|---|
 | `docs/.vitepress/theme/components/home/styles/tokens.scss` | 全部设计 token：底色/金橙/稀有度色板/语法高亮/字体/间距/圆角/动效变量 + `yl-container`、`yl-item-label` mixin。**改风格只动这里** |
@@ -42,22 +54,29 @@
 | `docs/.vitepress/theme/index.ts` | enhanceApp 全局注册 HomePage |
 | `docs/.vitepress/teekConfig.ts` | 用户改了 `notice.initOpen: false`（公告不再自动弹） |
 
-**➡️ 下一步：02 Hero** —— 入场动画（SplitText 逐字 + 光晕）、双 CTA、数据带（数字滚动 count-up，API `/api/v1/user/count` 走 dev 代理，返回 `{data: 163294}`）、双版本徽章；把金色光晕向上延伸到导航栏底下让毛玻璃透光。
+**➡️ 下一步：03 签名叙事区** —— before/after 滑杆版：同一张"掉落地面"场景，左半混乱物品名牌、右半过滤生效后的 T 档分层；拖动分割线对比。可直接复用 Hero 的名牌组件形态（Drop 数据结构已在 HeroSection 里验证过）。
 
-**后续队列**：03 签名叙事（滑杆版）→ 04 功能长廊（五幕逐个做，每幕可能是独立的小验收）→ 05 Bento → 06 社区生态带 → 07 CTA 终章 + 全页联动检查。
+**备选想法（讨论过未做）**：把旧首页的手绘涂鸦下划线 SVG path 搬进 Hero，用 DrawSVG（gsap 3.13+ 免费）做描边动画替换现在的直线下划线——用户已知悉，想做随时可加。
+
+**后续队列**：04 功能长廊（五幕逐个做，每幕可能是独立的小验收）→ 05 Bento → 06 社区生态带 → 07 CTA 终章 + 全页联动检查。
 
 **每块验收标准（三态）**：桌面全动画 / 移动端排版正确+动画静态或轻量 / `prefers-reduced-motion` 直接终态。
 
 ## 四、注意事项（踩过的坑）
 
 1. **dev server**：用户自己起在 **5173** 端口，AI 检查一律用 `http://localhost:5173/`，**不要**另起 5273
-2. **构建日志里的 `localStorage is not defined`（约37次）是 Teek 主题的 SSR 噪音**，stash 验证过与本次改版无关，忽略
-3. VitePress 是 SSG：GSAP/DOM 代码全部放 `onMounted`；公告弹窗若要内容更新在 `NoticeContent.vue`
-4. 右下角 Teek 自带浮动按钮（统计相关）在首页转圈，计划在 Hero 阶段统一隐藏/收纳首页浮动元素
-5. 亮色偏好用户直开首页理论上有"导航先亮后暗"一瞬，观感明显再加内联脚本纠正
-6. `docs/` 下的 .md 都会被构建成线上页面，开发文档放 `docs/.vitepress/` 下（本文件因此在这里）
-7. 首页旧内容（QQ群/广告/用户数）已从 index.md 移除，将在 04/05/06 区块中以新形态回归
-8. 素材来源：物品图标/命运卡图/掉落地面图从 `yl-editor` 的 public 与组件资产里拿（POE1/PO2 双套图标在 `yl-editor/src/data/category.ts` 体系）
+2. VitePress 是 SSG：GSAP/DOM 代码全部放 `onMounted`；公告弹窗若要内容更新在 `NoticeContent.vue`
+3. 右下角 Teek 悬浮件隐藏有坑：**回顶按钮（`.back-top`）和壁纸按钮在同一个容器 `.tk-right-bottom-button` 里**，只能藏 `.tk-right-bottom-button__button:not(.back-top)`，藏容器会连坐回顶；公告铃铛 `.tk-notice__icon` 单独藏。另：Teek 回顶只响应真实滚轮/平滑滚动，编程式瞬移滚动不算数（全站行为，验收时用滚轮）
+4. **GSAP 坑（重要）**：嵌入式浏览器/后台标签页会节流 rAF，GSAP 默认 `lagSmoothing` 会让入场时间线"爬行"（数秒只走 2%），必须在 onMounted 里 `gsap.ticker.lagSmoothing(false)`，后续所有区块照做
+5. **GSAP 坑 2**：待机循环动画（漂浮/呼吸）和入场动画会争夺同一元素的 opacity/transform——待机必须等入场结束再启动（`tl.eventCallback("onComplete", ...)`）
+6. 构建噪音清单（均与本改版无关，忽略）：`localStorage is not defined` ×37（Teek）、`document is not defined` ×1（06.POE网址导航.md 页面脚本存量问题）
+7. 版本号徽章（v3.29.2 / v2.0.8）目前写死在 HeroSection 模板里，未来可改为读 siteConfig 接口
+8. 亮色偏好用户直开首页理论上有"导航先亮后暗"一瞬，观感明显再加内联脚本纠正
+9. `docs/` 下的 .md 都会被构建成线上页面，开发文档放 `docs/.vitepress/` 下（本文件因此在这里）
+10. 首页旧内容（QQ群/广告/用户数）已从 index.md 移除，将在 04/05/06 区块中以新形态回归
+11. 素材来源：物品图标/命运卡图/掉落地面图从 `yl-editor` 的 public 与组件资产里拿（POE1/PO2 双套图标在 `yl-editor/src/data/category.ts` 体系）
+12. **协作流程（用户定）**：视觉验收一律由用户自己做，AI 只做 DOM/数值程序化检查，不要派视觉审查子智能体（慢）；文档只记用户验收过的状态，每块做完先给用户看，OK 后再写入本文档并 commit
+13. 连续编辑文件时 Vite HMR 会整页热重载产生竞态假象（动画看似卡死），排查前先干净 reload 一次再下结论
 
 ## 五、改动记录（按块追加）
 
@@ -68,3 +87,11 @@
 - 安装 `gsap@3.15.0`
 - 全宽覆盖、强制深色、隐藏首页明暗切换（`yl-home-active` 机制）、顶部金色氛围光晕（已实测可见）
 - 用户改动：teekConfig 公告 `initOpen: false`
+
+### 2026-09-14 · 02 Hero（第2块，已验收）
+
+- HeroSection 全量实现（入场时间线/SplitText/logo/双CTA/数据带/SCROLL/锚定光晕/金尘/7个过滤掉落物名牌+三层光柱+掉落演出），细节见上方"当前状态"
+- HomePage：隐藏 Teek 悬浮件（公告铃铛/壁纸按钮，回顶保留）、基础顶部光晕降至 0.1
+- 修复：GSAP lagSmoothing 爬行 bug（注意事项4）；待机与入场争夺 opacity（注意事项5）
+- 用户反馈迭代（共 5 轮）：删眉题、教程改按钮、用户数 SSR 初始 0 消闪烁、副标题两行、版本徽章独立行且改为圆点+文本非按钮样式、回顶按钮恢复、SCROLL 加强、数据带字号加大、加 logo、大光圈改锚定光晕+金尘、代码碎片改真实过滤名牌、+3 个名牌（贪婪战书/重革腰带/毁灭者之弓）、名牌散落感（dx/mt/bh）
+- 验收：桌面+移动程序化检查全绿（用户目视定稿）

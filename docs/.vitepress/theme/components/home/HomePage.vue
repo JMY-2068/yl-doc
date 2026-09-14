@@ -45,7 +45,7 @@ onBeforeUnmount(() => {
     position: relative;
     min-height: 100vh;
     background:
-        radial-gradient(1100px 520px at 50% 0%, rgba(232, 162, 60, 0.18), transparent 60%),
+        radial-gradient(1100px 520px at 50% 0%, rgba(232, 162, 60, 0.1), transparent 60%),
         var(--yl-bg);
     color: var(--yl-text-primary);
     font-family: var(--yl-font-body);
@@ -103,6 +103,12 @@ onBeforeUnmount(() => {
 
 /* —— 首页固定深色：隐藏导航栏明暗切换按钮（桌面/移动端全部实例）—— */
 html.yl-home-active .VPNavBarAppearance {
+    display: none;
+}
+
+/* —— 首页隐藏 Teek 悬浮件：公告铃铛 / 壁纸按钮（回顶按钮与壁纸同容器，只藏壁纸那颗）—— */
+html.yl-home-active .tk-notice__icon,
+html.yl-home-active .tk-right-bottom-button__button:not(.back-top) {
     display: none;
 }
 </style>
