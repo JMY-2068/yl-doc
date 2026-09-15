@@ -20,6 +20,33 @@ import CtaSection from "./sections/CtaSection.vue"
 
 // 首页固定深色叙事：强制深色 + 隐藏导航栏明暗切换按钮，离开时恢复用户原有主题
 let forcedDark = false
+
+// 主题自带的 a11y 重置会在 prefers-reduced-motion: reduce 时把全站 transition/animation
+// 时长压成 0（* !important）。用户定：首页动画无条件执行（2026-09-15）——
+// 进入首页时停用该媒体规则，离开时原样恢复。
+let disabledMediaRules: { rule: CSSMediaRule; text: string }[] = []
+
+function disableThemeReducedMotionReset() {
+    for (const sheet of document.styleSheets) {
+        let rules: CSSRuleList
+        try {
+            rules = sheet.cssRules
+        } catch {
+            continue
+        }
+        for (const r of rules) {
+            if (!(r instanceof CSSMediaRule)) continue
+            if (!r.media.mediaText.includes("prefers-reduced-motion")) continue
+            // 只停用命中 * 全局重置（含 transition-duration: 0s）的那条，不动组件级降级
+            const isGlobalReset = [...r.cssRules].some(x => /transition-duration:\s*0/i.test(x.cssText) && /\*\s*,/.test(x.cssText))
+            if (isGlobalReset) {
+                disabledMediaRules.push({ rule: r, text: r.media.mediaText })
+                r.media.mediaText = "not all"
+            }
+        }
+    }
+}
+
 onMounted(() => {
     const root = document.documentElement
     root.classList.add("yl-home-active")
@@ -27,11 +54,17 @@ onMounted(() => {
         root.classList.add("dark")
         forcedDark = true
     }
+    disableThemeReducedMotionReset()
 })
+
 onBeforeUnmount(() => {
     const root = document.documentElement
     root.classList.remove("yl-home-active")
     if (forcedDark) root.classList.remove("dark")
+    for (const { rule, text } of disabledMediaRules) {
+        rule.media.mediaText = text
+    }
+    disabledMediaRules = []
 })
 </script>
 

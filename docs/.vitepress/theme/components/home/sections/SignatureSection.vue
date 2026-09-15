@@ -406,7 +406,10 @@ function endDrag() {
 .yl-sig--scroll .yl-sig__drop {
     opacity: 0;
     transform: translateY(14px) scale(0.85);
-    transition: opacity 0.45s ease, transform 0.5s var(--yl-ease-out);
+    /* 注意：本站构建管线会吃掉 transition 简写里的 var()，必须拆成 longhand */
+    transition-property: opacity, transform;
+    transition-duration: 0.45s, 0.5s;
+    transition-timing-function: ease, cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .yl-sig--scroll .yl-sig__drop--on {
@@ -425,7 +428,10 @@ function endDrag() {
 .yl-sig--scroll .yl-sig__beam {
     transform: scaleY(0);
     transform-origin: bottom center;
-    transition: transform 0.5s var(--yl-ease-out) 0.1s;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
 }
 
 .yl-sig--scroll .yl-sig__drop--on .yl-sig__beam {

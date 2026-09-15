@@ -3,7 +3,7 @@
         <div class="yl-act__grid yl-act2__grid">
             <!-- 左列：演示（迷你物价排序，同编辑器"左参考 / 右分级"布局） -->
             <div class="yl-act__demo">
-                <div ref="panel" class="yl-panel yl-price">
+                <div ref="panel" class="yl-panel yl-price" data-rise style="--d: 0.1s">
                     <div class="yl-panel__head">
                         <span class="yl-panel__dots" aria-hidden="true"><i /><i /><i /></span>
                         <span class="yl-panel__title">物价排序 · {{ cat.label }}</span>
@@ -70,13 +70,13 @@
 
             <!-- 右列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker">功能长廊 · ACT 02 / 05</p>
-                <h3 class="yl-act__title">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
-                <p class="yl-act__desc">
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 02 / 05</p>
+                <h3 class="yl-act__title" data-rise style="--d: 0.06s">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
+                <p class="yl-act__desc" data-rise style="--d: 0.12s">
                     命运卡、暗金、圣甲虫、卓越宝石、星团珠宝，按最新物价从高到低排序、自动分档——物价变了，分类T级跟着一键同步。
                 </p>
                 <ul class="yl-act__list">
-                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.15 + i * 0.08 + 's' }">
+                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.18 + i * 0.08 + 's' }">
                         <span class="yl-act__num">{{ String(i + 1).padStart(2, "0") }}</span>
                         <span>{{ s }}</span>
                     </li>
@@ -225,7 +225,8 @@ onMounted(() => {
     io = new IntersectionObserver(
         (entries) => {
             if (entries.some(e => e.isIntersecting)) {
-                riseIn()
+                // 双 rAF：先让隐藏初始态绘制一帧再触发过渡，修复"载入时已在视口内→无动画直接显示"
+                requestAnimationFrame(() => requestAnimationFrame(riseIn))
                 if (!autoPlayed) {
                     autoPlayed = true
                     autoTimer = setTimeout(() => {
@@ -238,7 +239,14 @@ onMounted(() => {
         { threshold: 0.25 },
     )
     io.observe(root.value)
-    riseFallback = setTimeout(riseIn, 3000)
+    // 兜底：仅在元素已进入视口却未收到 IO 回调时补触发，避免加载数秒后在屏幕外提前播完动画
+    riseFallback = setTimeout(() => {
+        const el = root.value
+        if (el && !el.classList.contains("is-in")) {
+            const r = el.getBoundingClientRect()
+            if (r.top < innerHeight && r.bottom > 0) riseIn()
+        }
+    }, 3000)
 })
 
 onBeforeUnmount(() => {
@@ -270,16 +278,19 @@ onBeforeUnmount(() => {
     grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
 }
 
-/* —— 入场：从下往上浮现 —— */
+/* —— 入场：淡入 + 上浮（对齐 Hero 副标题手感，逐项延迟见 --d） —— */
 .yl-act2.js-anim [data-rise] {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(24px);
 }
 
 .yl-act2.js-anim.is-in [data-rise] {
     opacity: 1;
     transform: none;
-    transition: opacity 0.55s var(--yl-ease-out), transform 0.55s var(--yl-ease-out);
+    /* 注意：本站构建管线会吃掉 transition 简写里的 var()，必须拆成 longhand */
+    transition-property: opacity, transform;
+    transition-duration: 0.65s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--d, 0s);
 }
 

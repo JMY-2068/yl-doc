@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="yl-hero__scroll" aria-hidden="true"><span>SCROLL</span><i></i></div>
+        <div class="yl-hero__scroll" aria-hidden="true"><span>向下滚动</span><i></i></div>
     </section>
 </template>
 
@@ -455,7 +455,9 @@ onBeforeUnmount(() => {
     font-weight: 600;
     font-size: 15px;
     letter-spacing: 0.06em;
-    transition: transform var(--yl-dur-fast) var(--yl-ease-out), box-shadow var(--yl-dur-fast) var(--yl-ease-out), background-color var(--yl-dur-fast) var(--yl-ease-out), filter var(--yl-dur-fast) var(--yl-ease-out);
+    transition-property: transform, box-shadow, background-color, filter;
+    transition-duration: 0.25s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 
     &:hover {
         transform: translateY(-2px);

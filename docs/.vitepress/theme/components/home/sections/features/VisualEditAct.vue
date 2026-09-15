@@ -3,13 +3,13 @@
         <div class="yl-act__grid">
             <!-- 左列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker">功能长廊 · ACT 01 / 05</p>
-                <h3 class="yl-act__title">可视化编辑，所见即所得</h3>
-                <p class="yl-act__desc">
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 01 / 05</p>
+                <h3 class="yl-act__title" data-rise style="--d: 0.06s">可视化编辑，所见即所得</h3>
+                <p class="yl-act__desc" data-rise style="--d: 0.12s">
                     不用学习过滤语法——颜色、字号、光柱，在编辑面板里实时修改，实时预览。
                 </p>
                 <ul class="yl-act__list">
-                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': i * 0.08 + 's' }">
+                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.18 + i * 0.08 + 's' }">
                         <span class="yl-act__num">{{ String(i + 1).padStart(2, "0") }}</span>
                         <span>{{ s }}</span>
                     </li>
@@ -18,7 +18,7 @@
 
             <!-- 右列：演示（迷你编辑面板 + 游戏地面预览） -->
             <div class="yl-act__demo">
-                <div class="yl-panel">
+                <div class="yl-panel" data-rise style="--d: 0.1s">
                     <div class="yl-panel__head">
                         <span class="yl-panel__dots" aria-hidden="true"><i /><i /><i /></span>
                         <span class="yl-panel__title">规则编辑 · 神圣石</span>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="yl-ground">
+                <div class="yl-ground" data-rise style="--d: 0.18s">
                     <div class="yl-ground__drop">
                         <div class="yl-ground__plate" :style="plateStyle">
                             <img
@@ -209,14 +209,22 @@ onMounted(() => {
     io = new IntersectionObserver(
         (entries) => {
             if (entries.some(e => e.isIntersecting)) {
-                riseIn()
+                // 双 rAF：先让隐藏初始态绘制一帧再触发过渡，修复"载入时已在视口内→无动画直接显示"
+                requestAnimationFrame(() => requestAnimationFrame(riseIn))
                 io?.disconnect()
             }
         },
         { threshold: 0.2 },
     )
     io.observe(root.value)
-    riseFallback = setTimeout(riseIn, 3000) // 兜底：IntersectionObserver 异常时也决不让内容停留在隐藏态
+    // 兜底：仅在元素已进入视口却未收到 IO 回调时补触发，避免加载数秒后在屏幕外提前播完动画
+    riseFallback = setTimeout(() => {
+        const el = root.value
+        if (el && !el.classList.contains("is-in")) {
+            const r = el.getBoundingClientRect()
+            if (r.top < innerHeight && r.bottom > 0) riseIn()
+        }
+    }, 3000)
 })
 
 onBeforeUnmount(() => {
@@ -240,16 +248,19 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 
-/* —— 入场：从下往上浮现（仅 JS 就绪后启用，逐项延迟见 --d） —— */
+/* —— 入场：淡入 + 上浮（对齐 Hero 副标题手感，逐项延迟见 --d） —— */
 .yl-act1.js-anim [data-rise] {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(24px);
 }
 
 .yl-act1.js-anim.is-in [data-rise] {
     opacity: 1;
     transform: none;
-    transition: opacity 0.55s var(--yl-ease-out), transform 0.55s var(--yl-ease-out);
+    /* 注意：本站构建管线会吃掉 transition 简写里的 var()，必须拆成 longhand */
+    transition-property: opacity, transform;
+    transition-duration: 0.65s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--d, 0s);
 }
 
@@ -449,7 +460,9 @@ onBeforeUnmount(() => {
         height: 18px;
         border-radius: 50%;
         background: var(--yl-text-faint);
-        transition: left 0.3s var(--yl-ease-out), background-color 0.3s ease;
+        transition-property: left, background-color;
+        transition-duration: 0.3s;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &.is-on {
@@ -536,7 +549,9 @@ onBeforeUnmount(() => {
     transform-origin: bottom center;
     transform: scaleY(0);
     opacity: 0;
-    transition: opacity 0.5s var(--yl-ease-out), transform 0.5s var(--yl-ease-out);
+    transition-property: opacity, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     filter: drop-shadow(0 0 10px rgba(255, 40, 0, 0.35));
     pointer-events: none;
 
