@@ -169,10 +169,13 @@ onMounted(() => {
     gsap.ticker.lagSmoothing(false)
     const q = gsap.utils.selector(root.value)
 
+    // 用户数请求与入场动画并行发出，等数字行亮相时数据多半已就绪，跳动无需再等网络
+    const countReady = fetchCount()
+
     mm = gsap.matchMedia()
 
-    // 正常动效：入场时间线 + 背景代码漂浮 + 金尘粒子
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // 动画无条件执行，不读系统 prefers-reduced-motion；matchMedia 仅借用其挂载/卸载时的统一 revert
+    mm.add("(min-width: 0px)", () => {
         const split = new SplitText(q(".yl-hero__title"), { type: "chars" })
         if (dust.value) spawnDust(dust.value)
 
@@ -183,14 +186,15 @@ onMounted(() => {
             .from(q(".yl-hero__subtitle"), { autoAlpha: 0, y: 24, duration: 0.7 }, "-=0.35")
             .from(q(".yl-btn"), { autoAlpha: 0, y: 24, duration: 0.6, stagger: 0.08 }, "-=0.35")
             .from(q(".yl-hero__stats > *"), { autoAlpha: 0, y: 18, duration: 0.6, stagger: 0.06 }, "-=0.3")
-            .from(q(".yl-hero__scroll"), { autoAlpha: 0, duration: 0.8 }, "-=0.2")
+            // 数字行开始淡入（"<" = 上一段起点）就触发跳动，不再等整条时间线（含掉落物）播完
             .call(async () => {
                 const el = q("#yl-user-count")[0] as HTMLElement | undefined
                 if (!el) return
-                const count = await fetchCount()
+                const count = await countReady
                 if (count) animateCount(el, count)
                 else el.textContent = "160,000+"
-            })
+            }, null, "<")
+            .from(q(".yl-hero__scroll"), { autoAlpha: 0, duration: 0.8 }, "-=0.2")
 
         // 掉落物入场：从上方砸落 → 名牌落地挤压回弹 → 光柱从底部迸发
         q(".yl-drop").forEach((el, i) => {
@@ -228,8 +232,6 @@ onMounted(() => {
 
         return () => split.revert()
     })
-
-    // prefers-reduced-motion：不建时间线，内容保持默认可见的终态
 })
 
 onBeforeUnmount(() => {
@@ -350,12 +352,6 @@ onBeforeUnmount(() => {
         filter: blur(2px);
         opacity: 0.8;
         z-index: -1;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        &::before {
-            animation: none;
-        }
     }
 }
 
@@ -554,12 +550,6 @@ onBeforeUnmount(() => {
         box-shadow: 0 0 8px var(--yl-gold-glow);
         transform-origin: top center;
         animation: yl-scroll-pulse 1.8s var(--yl-ease-inout) infinite;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        i {
-            animation: none;
-        }
     }
 }
 

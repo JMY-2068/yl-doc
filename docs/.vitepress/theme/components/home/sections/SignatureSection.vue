@@ -155,8 +155,9 @@ function beamStyle(it: SigItem) {
 }
 
 // ============ 模式与驱动 ============
-// slider：移动端 / 减少动效 —— 拖动分割线对比
-// scroll：桌面 —— 滚动驱动扫描线，垃圾逐个坠落、值钱的原地点亮
+// slider：移动端 —— 拖动分割线对比
+// scroll：桌面（≥960px）—— 滚动驱动扫描线，垃圾逐个坠落、值钱的原地点亮
+// 动画不读系统 prefers-reduced-motion，任何动效偏好下都执行
 const root = ref<HTMLElement>()
 const stage = ref<HTMLElement>()
 const mode = ref<"slider" | "scroll">("slider")
@@ -186,7 +187,7 @@ onMounted(() => {
     gsap.ticker.lagSmoothing(false)
 
     mm = gsap.matchMedia()
-    mm.add("(min-width: 960px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(min-width: 960px)", () => {
         mode.value = "scroll"
 
         // 320vh 高度由 mode class 驱动，须等 DOM 更新后再创建 ScrollTrigger，否则进度区间按矮尺寸计算
