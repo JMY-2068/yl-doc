@@ -8,9 +8,9 @@
         <div class="yl-sig__sticky">
             <div class="yl-sig__head">
                 <p class="yl-sig__kicker">BEFORE / AFTER</p>
-                <h2 class="yl-sig__title">同样的掉落，不同的世界</h2>
+                <h2 class="yl-sig__title">一眼看懂过滤是什么</h2>
                 <p class="yl-sig__desc">
-                    {{ mode === "scroll" ? "继续滚动，让过滤器扫过战场" : "拖动分割线，看看过滤器做了什么 —— 垃圾原地消失，值钱的在原地亮起" }}
+                    {{ mode === "scroll" ? "继续滚动，让过滤器持续加载" : "拖动分割线，看看过滤器是什么效果 —— 垃圾消失，各分类价值清晰可见" }}
                 </p>
                 <Transition name="yl-sig-fade" mode="out-in">
                     <p v-if="mode === 'scroll'" :key="phase" class="yl-sig__phase">{{ phases[phase] }}</p>
@@ -178,7 +178,7 @@ function passed(it: SigItem) {
     return sweep.value >= it.x + widthPct(it) - 1
 }
 
-const phases = ["满屏掉落，看不过来？", "过滤器扫过 —— 垃圾隐去", "值钱的，原地亮起"]
+const phases = ["满屏掉落，分不清价值？", "加载过滤器 —— 垃圾消失", "各分类价值清晰可见"]
 const phase = computed(() => (sweep.value < 38 ? 0 : sweep.value < 76 ? 1 : 2))
 
 onMounted(() => {
