@@ -23,7 +23,7 @@
             <h1 class="yl-hero__title">一乐过滤</h1>
             <div class="yl-hero__underline" aria-hidden="true"></div>
             <div class="yl-hero__subtitle">
-                <p class="yl-hero__subtitle-main">国服最好用的过滤编辑工具</p>
+                <p class="yl-hero__subtitle-main">流放之路国服最好用的过滤编辑工具</p>
                 <p class="yl-hero__subtitle-sub">简单、高效、灵活、高度自定义</p>
             </div>
 
