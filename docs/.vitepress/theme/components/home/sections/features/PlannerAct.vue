@@ -1,79 +1,12 @@
 <template>
-    <div ref="root" class="yl-act2">
-        <div class="yl-act__grid yl-act2__grid">
-            <!-- 左列：演示（迷你物价排序，同编辑器"左参考 / 右分级"布局） -->
-            <div class="yl-act__demo">
-                <div ref="panel" class="yl-panel yl-price">
-                    <div class="yl-panel__head">
-                        <span class="yl-panel__dots" aria-hidden="true"><i /><i /><i /></span>
-                        <span class="yl-panel__title">物价排序 · {{ cat.label }}</span>
-                        <div class="yl-price__src" role="group" aria-label="数据源">
-                            <button type="button" :class="{ 'is-on': source === 'cn' }" @click="setSrc('cn')">国服</button>
-                            <button type="button" :class="{ 'is-on': source === 'global' }" @click="setSrc('global')">国际服</button>
-                        </div>
-                    </div>
-
-                    <div class="yl-price__tabs" data-rise style="--d: 0.12s">
-                        <button
-                            v-for="c in cats"
-                            :key="c.label"
-                            type="button"
-                            :class="{ 'is-on': cat.label === c.label }"
-                            @click="setCat(c)"
-                        >{{ c.label }}</button>
-                    </div>
-
-                    <div class="yl-price__body" data-rise style="--d: 0.19s">
-                        <!-- 左：物价列表参考（保持原序，仅数值随数据源变化） -->
-                        <div class="yl-price__list">
-                            <div v-for="it in cat.items" :key="cat.label + it.name" class="yl-price__row">
-                                <span class="yl-price__name">{{ it.name }}</span>
-                                <span class="yl-price__val">{{ fmt(it) }}<i>C</i></span>
-                            </div>
-                        </div>
-
-                        <!-- 右：排序分级区（点排序后按档分组） -->
-                        <div class="yl-price__tiers">
-                            <div v-if="!sorted" class="yl-price__empty">点击「按物价排序」生成分级</div>
-                            <template v-else>
-                                <div
-                                    v-for="(g, gi) in tierGroups"
-                                    :key="cat.label + g.tier"
-                                    class="yl-price__tgroup"
-                                    :style="{ animationDelay: gi * 0.12 + 's' }"
-                                >
-                                    <span class="yl-price__tlabel" :class="'is-t' + g.tier">T{{ g.tier }}</span>
-                                    <span v-for="it in g.items" :key="it.name" class="yl-price__chip" :class="'is-t' + g.tier">{{ it.name }}</span>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-
-                    <div class="yl-price__foot" data-rise style="--d: 0.26s">
-                        <button type="button" class="yl-price__btn" @click="toggleSort">
-                            {{ sorted ? "恢复原序" : "按物价排序" }}
-                        </button>
-                        <span class="yl-price__note">示例数据</span>
-                    </div>
-                </div>
-
-                <!-- 编辑器实际界面：窗框缩略图，点击放大 -->
-                <div data-rise style="--d: 0.33s">
-                    <ShotThumb
-                        src="/assets/index/物价排序.webp"
-                        alt="编辑器物价排序实际界面"
-                        caption="编辑器实际界面 · 物价排序（T1–T5 按价格阈值分档）"
-                        pos="50% 8%"
-                    />
-                </div>
-            </div>
-
-            <!-- 右列：文案 -->
+    <div ref="root" class="yl-act3">
+        <div class="yl-act__grid yl-act3__grid">
+            <!-- 左列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker">功能长廊 · ACT 02 / 05</p>
-                <h3 class="yl-act__title">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
+                <p class="yl-act__kicker">功能长廊 · ACT 03 / 05</p>
+                <h3 class="yl-act__title">通货、宝石实时规划<span class="yl-act__badge">POE2</span></h3>
                 <p class="yl-act__desc">
-                    命运卡、暗金、圣甲虫、卓越宝石、星团珠宝，按最新物价从高到低排序、自动分档——物价变了，分类T级跟着一键同步。
+                    通货规划器、宝石规划器，按实时物价从高到低排序、自动分档——档位跟着当前物价走。
                 </p>
                 <ul class="yl-act__list">
                     <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.15 + i * 0.08 + 's' }">
@@ -81,6 +14,87 @@
                         <span>{{ s }}</span>
                     </li>
                 </ul>
+            </div>
+
+            <!-- 右列：演示（通货 / 宝石规划器，形态同物价排序：左参考 / 右分级） -->
+            <div class="yl-act__demo">
+                <div ref="panel" class="yl-panel yl-plan">
+                    <div class="yl-panel__head">
+                        <span class="yl-panel__dots" aria-hidden="true"><i /><i /><i /></span>
+                        <span class="yl-panel__title">{{ activePlanner.key }} · {{ cat.label }}</span>
+                    </div>
+
+                    <!-- 顶层：规划器切换 -->
+                    <div class="yl-plan__switch" data-rise style="--d: 0.12s">
+                        <button
+                            v-for="p in planners"
+                            :key="p.key"
+                            type="button"
+                            :class="{ 'is-on': activePlanner.key === p.key }"
+                            @click="setPlanner(p)"
+                        >{{ p.key }}</button>
+                    </div>
+
+                    <!-- 通货规划器：子分类 tab -->
+                    <div v-if="activePlanner.cats.length > 1" class="yl-plan__tabs" data-rise style="--d: 0.16s">
+                        <button
+                            v-for="c in activePlanner.cats"
+                            :key="c.label"
+                            type="button"
+                            :class="{ 'is-on': cat.label === c.label }"
+                            @click="setCat(c)"
+                        >{{ c.label }}</button>
+                    </div>
+
+                    <div class="yl-plan__body" data-rise style="--d: 0.2s">
+                        <!-- 左：物价列表参考（原序固定） -->
+                        <div class="yl-plan__list">
+                            <div v-for="it in cat.items" :key="activePlanner.key + it.name" class="yl-plan__row">
+                                <span class="yl-plan__name">{{ it.name }}</span>
+                                <span class="yl-plan__val">{{ fmt(it) }}<i>E</i></span>
+                            </div>
+                        </div>
+
+                        <!-- 右：排序分级区 -->
+                        <div class="yl-plan__tiers">
+                            <div v-if="!sorted" class="yl-plan__empty">点击「按物价排序」生成分级</div>
+                            <template v-else>
+                                <div
+                                    v-for="(g, gi) in tierGroups"
+                                    :key="activePlanner.key + cat.label + g.tier"
+                                    class="yl-plan__tgroup"
+                                    :style="{ animationDelay: gi * 0.12 + 's' }"
+                                >
+                                    <span class="yl-plan__tlabel" :class="'is-t' + g.tier">T{{ g.tier }}</span>
+                                    <span v-for="it in g.items" :key="it.name" class="yl-plan__chip" :class="'is-t' + g.tier">{{ it.name }}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="yl-plan__foot" data-rise style="--d: 0.26s">
+                        <button type="button" class="yl-plan__btn" @click="toggleSort">
+                            {{ sorted ? "恢复原序" : "按物价排序" }}
+                        </button>
+                        <span class="yl-plan__note">示例数据</span>
+                    </div>
+                </div>
+
+                <!-- 编辑器实际界面：通货 / 宝石两张截图 -->
+                <div class="yl-plan__shots" data-rise style="--d: 0.33s">
+                    <ShotThumb
+                        src="/assets/index/通货规划器.webp"
+                        alt="编辑器通货规划器实际界面"
+                        caption="编辑器实际界面 · 通货规划器"
+                        pos="50% 8%"
+                    />
+                    <ShotThumb
+                        src="/assets/index/宝石规划器.webp"
+                        alt="编辑器宝石规划器实际界面"
+                        caption="编辑器实际界面 · 宝石规划器（血脉辅助宝石）"
+                        pos="50% 8%"
+                    />
+                </div>
             </div>
         </div>
     </div>
@@ -90,119 +104,144 @@
 import { computed, onBeforeUnmount, onMounted, ref } from "vue"
 import ShotThumb from "./ShotThumb.vue"
 
-// 物价排序演示：物品名取自 yl-editor poe1 真实数据（json-data/poe1/*.json）
-// 价格为示例数据（国服/国际服两套），仅作演示量级，用户后续可校正；不请求线上接口
-// 布局同编辑器：左侧物价列表参考（原序），右侧点排序后生成 T1/T2/T3 分级区
-type Source = "cn" | "global"
-interface PriceItem {
+// POE2 规划器演示（第三幕 = 通货 + 宝石；装备规划器单开第四幕）
+// 物品名取自 yl-editor poe2 真实数据（通货.json / 血脉辅助宝石.json）；价格为示例值（E 单位），用户校正
+interface PlanItem {
     name: string
-    cn: number
-    global: number
+    price: number
 }
-interface Cat {
+interface PlanCat {
     label: string
-    items: PriceItem[]
+    items: PlanItem[]
+}
+interface Planner {
+    key: string
+    cats: PlanCat[]
 }
 
-const cats: Cat[] = [
+const planners: Planner[] = [
     {
-        label: "命运卡",
-        items: [
-            { name: "谦逊", cn: 42, global: 55 },
-            { name: "纯净帝王", cn: 6, global: 9 },
-            { name: "觉醒", cn: 18, global: 24 },
-            { name: "一股寒风", cn: 1, global: 2 },
-            { name: "弃财求生", cn: 55, global: 41 },
-            { name: "墨水点滴", cn: 2, global: 3 },
+        key: "通货规划器",
+        cats: [
+            {
+                label: "符文",
+                items: [
+                    { name: "次级沙漠符文", price: 2 },
+                    { name: "次级冰川符文", price: 1 },
+                    { name: "次级风暴符文", price: 6 },
+                    { name: "次级钢铁符文", price: 3 },
+                    { name: "次级身躯符文", price: 14 },
+                    { name: "次级心灵符文", price: 9 },
+                ],
+            },
+            {
+                label: "精华",
+                items: [
+                    { name: "次级身躯精华", price: 12 },
+                    { name: "次级心灵精华", price: 8 },
+                    { name: "次级强化精华", price: 3 },
+                    { name: "次级磨蚀精华", price: 5 },
+                    { name: "次级烈焰精华", price: 1 },
+                    { name: "次级绝缘精华", price: 2 },
+                ],
+            },
+            {
+                label: "预兆",
+                items: [
+                    { name: "恢复预兆", price: 4 },
+                    { name: "复苏预兆", price: 18 },
+                    { name: "进步预兆", price: 7 },
+                    { name: "消减预兆", price: 2 },
+                    { name: "左旋消抹预兆", price: 11 },
+                    { name: "右旋消抹预兆", price: 9 },
+                ],
+            },
+            {
+                label: "灵核",
+                items: [
+                    { name: "塔卡提的灵核", price: 26 },
+                    { name: "欧佩罗蒂的灵核", price: 15 },
+                    { name: "佳华尼的灵核", price: 8 },
+                    { name: "扎拉迪的灵核", price: 21 },
+                    { name: "奇塔夸雷特的灵核", price: 5 },
+                    { name: "普华特的灵核", price: 12 },
+                ],
+            },
+            {
+                label: "雕像",
+                items: [
+                    { name: "巨熊雕像", price: 6 },
+                    { name: "狂猿雕像", price: 3 },
+                    { name: "雄鹿雕像", price: 16 },
+                    { name: "野猪雕像", price: 2 },
+                    { name: "毒蛇雕像", price: 24 },
+                    { name: "恶狼雕像", price: 9 },
+                ],
+            },
         ],
     },
     {
-        label: "暗金",
-        items: [
-            { name: "法师之血", cn: 6200, global: 8400 },
-            { name: "猎首", cn: 4100, global: 6200 },
-            { name: "原初之罪", cn: 3100, global: 2600 },
-            { name: "结晶全知", cn: 780, global: 640 },
-            { name: "群星之灰", cn: 540, global: 980 },
-            { name: "侍从", cn: 95, global: 60 },
-        ],
-    },
-    {
-        label: "圣甲虫",
-        items: [
-            { name: "虫群之裂隙圣甲虫", cn: 28, global: 35 },
-            { name: "不稳之裂隙圣甲虫", cn: 8, global: 6 },
-            { name: "元帅之裂隙圣甲虫", cn: 45, global: 52 },
-            { name: "狂怒虫群之裂隙圣甲虫", cn: 15, global: 12 },
-            { name: "增涌共鸣之裂隙圣甲虫", cn: 60, global: 48 },
-            { name: "激增之制图者圣甲虫", cn: 5, global: 4 },
-        ],
-    },
-    {
-        label: "卓越宝石",
-        items: [
-            { name: "赋予(辅) 4级", cn: 380, global: 420 },
-            { name: "增幅(辅) 4级", cn: 260, global: 300 },
-            { name: "启蒙(辅) 4级", cn: 300, global: 340 },
-            { name: "赋予(辅) 3级", cn: 35, global: 28 },
-            { name: "增幅(辅) 3级", cn: 22, global: 18 },
-            { name: "启蒙(辅) 3级", cn: 30, global: 25 },
-        ],
-    },
-    {
-        label: "星团珠宝",
-        items: [
-            { name: "[大]法术伤害", cn: 25, global: 31 },
-            { name: "[大]攻击伤害", cn: 18, global: 22 },
-            { name: "[大]元素伤害", cn: 12, global: 15 },
-            { name: "[大]斧类和剑类伤害", cn: 8, global: 6 },
-            { name: "[大]弓类伤害", cn: 15, global: 19 },
-            { name: "[大]双持伤害", cn: 6, global: 5 },
+        key: "宝石规划器",
+        cats: [
+            {
+                label: "血脉辅助宝石",
+                items: [
+                    { name: "布鲁特斯之脑", price: 38 },
+                    { name: "阿图鲁伊的放血术", price: 12 },
+                    { name: "伊恩哈尔的魔物仪式", price: 22 },
+                    { name: "厄罗克的熔炼术", price: 6 },
+                    { name: "帕夸特的契约", price: 45 },
+                    { name: "薇伦塔之推进", price: 3 },
+                ],
+            },
         ],
     },
 ]
 
 const listCopy = [
-    "命运卡 / 暗金 / 圣甲虫 / 卓越宝石 / 星团珠宝",
-    "国服、国际服双数据源，一键切换",
-    "按价格自动分档，档位样式随价值",
-    "排序结果一键写回过滤器规则",
+    "通货规划器：符文 / 精华 / 预兆 / 灵核 / 雕像…",
+    "宝石规划器：血脉辅助宝石",
+    "按实时物价自动分档，配色自由修改",
+    "分级结果一键写回过滤器规则",
 ]
 
 const root = ref<HTMLElement>()
-const cat = ref(cats[0])
-const source = ref<Source>("cn")
+const planner = ref(planners[0])
+const cat = ref(planners[0].cats[0])
 const sorted = ref(false)
+
+const activePlanner = computed(() => planner.value)
 
 // 排序分级：价格降序后按名次分档——第1名 T1，2~3名 T2，其余 T3
 const tierGroups = computed(() => {
     if (!sorted.value) return []
-    const groups: { tier: number; items: PriceItem[] }[] = [
+    const groups: { tier: number; items: PlanItem[] }[] = [
         { tier: 1, items: [] },
         { tier: 2, items: [] },
         { tier: 3, items: [] },
     ]
-    const ordered = [...cat.value.items].sort((a, b) => b[source.value] - a[source.value])
+    const ordered = [...cat.value.items].sort((a, b) => b.price - a.price)
     ordered.forEach((it, rank) => {
         groups[rank === 0 ? 0 : rank <= 2 ? 1 : 2].items.push(it)
     })
     return groups.filter(g => g.items.length > 0)
 })
 
-function fmt(it: PriceItem): string {
-    return it[source.value].toLocaleString()
+function fmt(it: PlanItem): string {
+    return it.price.toLocaleString()
 }
 
-function setCat(c: Cat) {
-    if (cat.value.label === c.label) return
-    cat.value = c
+function setPlanner(p: Planner) {
+    if (planner.value.key === p.key) return
+    planner.value = p
+    cat.value = p.cats[0]
     sorted.value = false
 }
 
-function setSrc(s: Source) {
-    if (source.value === s) return
-    source.value = s
-    // 已排序状态下切数据源：分级区立即按新数据源重新分档，直观展示双源差异
+function setCat(c: PlanCat) {
+    if (cat.value.label === c.label) return
+    cat.value = c
+    sorted.value = false
 }
 
 function toggleSort() {
@@ -249,7 +288,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-.yl-act2 {
+.yl-act3 {
     width: min(var(--yl-container), 100%);
     margin-inline: auto;
     box-sizing: border-box;
@@ -265,18 +304,18 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 
-/* 第二幕镜像：演示在左、文案在右 */
-.yl-act2__grid {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+/* 第三幕回正：文案左、演示右 */
+.yl-act3__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
 }
 
 /* —— 入场：从下往上浮现 —— */
-.yl-act2.js-anim [data-rise] {
+.yl-act3.js-anim [data-rise] {
     opacity: 0;
     transform: translateY(16px);
 }
 
-.yl-act2.js-anim.is-in [data-rise] {
+.yl-act3.js-anim.is-in [data-rise] {
     opacity: 1;
     transform: none;
     transition: opacity 0.55s var(--yl-ease-out), transform 0.55s var(--yl-ease-out);
@@ -306,7 +345,7 @@ onBeforeUnmount(() => {
     color: var(--yl-text-primary);
 }
 
-/* POE1 编辑器专属功能徽标：标题末字右上方（列间隙内）；移动端回退为行内 */
+/* 版本专属徽标：标题末字右上方（列间隙内，本幕 POE2 专属）；移动端回退为行内 */
 .yl-act__badge {
     position: absolute;
     top: -4px;
@@ -355,7 +394,7 @@ onBeforeUnmount(() => {
     font-size: 13px;
 }
 
-/* —— 面板外壳（与第一幕同形态） —— */
+/* —— 面板外壳 —— */
 .yl-panel {
     background: var(--yl-bg-elevated);
     border: 1px solid var(--yl-border-plain);
@@ -395,40 +434,45 @@ onBeforeUnmount(() => {
     white-space: nowrap;
 }
 
-/* —— 数据源切换 —— */
-.yl-price__src {
+/* —— 顶层规划器切换 —— */
+.yl-plan__switch {
     display: flex;
-    border: 1px solid var(--yl-border-strong);
-    border-radius: var(--yl-radius-sm);
-    overflow: hidden;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 
     button {
-        padding: 3px 10px;
-        font-size: 12px;
-        font-family: var(--yl-font-mono);
+        padding: 6px 16px;
+        font-size: 14px;
+        font-weight: 700;
         color: var(--yl-text-secondary);
-        background: transparent;
-        border: none;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--yl-border-plain);
+        border-radius: 999px;
         cursor: pointer;
-        transition: color 0.2s ease, background-color 0.2s ease;
+        transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            color: var(--yl-text-primary);
+        }
 
         &.is-on {
-            color: #1b1305;
-            background: linear-gradient(135deg, var(--yl-gold-bright), var(--yl-gold-deep));
-            font-weight: 700;
+            color: var(--yl-gold-bright);
+            border-color: var(--yl-border-strong);
+            background: rgba(232, 162, 60, 0.1);
         }
     }
 }
 
-/* —— 分类 tab —— */
-.yl-price__tabs {
+/* —— 子分类 tab —— */
+.yl-plan__tabs {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
     margin-bottom: 12px;
 
     button {
-        padding: 5px 12px;
+        padding: 4px 12px;
         font-size: 13px;
         color: var(--yl-text-secondary);
         background: rgba(0, 0, 0, 0.25);
@@ -450,22 +494,21 @@ onBeforeUnmount(() => {
 }
 
 /* —— 主体：左参考列表 / 右分级区 —— */
-.yl-price__body {
+.yl-plan__body {
     display: grid;
     grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
     gap: 12px;
     align-items: stretch;
 }
 
-/* 左：物价列表参考（原序固定） */
-.yl-price__list {
+.yl-plan__list {
     display: flex;
     flex-direction: column;
     gap: 4px;
     min-height: 226px;
 }
 
-.yl-price__row {
+.yl-plan__row {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -475,7 +518,7 @@ onBeforeUnmount(() => {
     background: rgba(0, 0, 0, 0.18);
 }
 
-.yl-price__name {
+.yl-plan__name {
     font-size: 13px;
     color: var(--yl-text-secondary);
     overflow: hidden;
@@ -483,7 +526,7 @@ onBeforeUnmount(() => {
     white-space: nowrap;
 }
 
-.yl-price__val {
+.yl-plan__val {
     font-family: var(--yl-font-mono);
     font-size: 13px;
     font-weight: 700;
@@ -498,8 +541,7 @@ onBeforeUnmount(() => {
     }
 }
 
-/* 右：排序分级区 */
-.yl-price__tiers {
+.yl-plan__tiers {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -510,7 +552,7 @@ onBeforeUnmount(() => {
     min-height: 226px;
 }
 
-.yl-price__empty {
+.yl-plan__empty {
     flex: 1;
     display: flex;
     align-items: center;
@@ -525,15 +567,15 @@ onBeforeUnmount(() => {
     line-height: 1.7;
 }
 
-.yl-price__tgroup {
+.yl-plan__tgroup {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 7px;
-    animation: yl-act2-group-in 0.45s var(--yl-ease-out) both;
+    animation: yl-act3-group-in 0.45s var(--yl-ease-out) both;
 }
 
-@keyframes yl-act2-group-in {
+@keyframes yl-act3-group-in {
     from {
         opacity: 0;
         transform: translateY(10px);
@@ -544,7 +586,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.yl-price__tlabel {
+.yl-plan__tlabel {
     font-family: var(--yl-font-mono);
     font-size: 11px;
     font-weight: 700;
@@ -561,7 +603,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.yl-price__chip {
+.yl-plan__chip {
     font-size: 12px;
     padding: 3px 9px;
     border-radius: 999px;
@@ -582,14 +624,14 @@ onBeforeUnmount(() => {
 }
 
 /* —— 底部：排序按钮 —— */
-.yl-price__foot {
+.yl-plan__foot {
     display: flex;
     align-items: center;
     gap: 14px;
     margin-top: 14px;
 }
 
-.yl-price__btn {
+.yl-plan__btn {
     padding: 9px 20px;
     font-size: 14px;
     font-weight: 700;
@@ -612,10 +654,21 @@ onBeforeUnmount(() => {
     }
 }
 
-.yl-price__note {
+.yl-plan__note {
     margin-left: auto;
     font-size: 11px;
     color: var(--yl-text-faint);
+}
+
+/* —— 双截图并排 —— */
+.yl-plan__shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    :deep(.yl-shot) {
+        margin-top: 16px;
+    }
 }
 
 /* —— 移动端：文案在上、演示在下，主体竖排 —— */
@@ -627,37 +680,38 @@ onBeforeUnmount(() => {
         vertical-align: 0.4em;
     }
 
-    .yl-act2__grid {
+    .yl-act3__grid {
         grid-template-columns: 1fr;
         gap: 28px;
-    }
-
-    .yl-act__copy {
-        order: -1;
     }
 
     .yl-panel {
         padding: 14px 14px 16px;
     }
 
-    .yl-price__body {
+    .yl-plan__body {
         grid-template-columns: 1fr;
     }
 
-    .yl-price__list,
-    .yl-price__tiers {
+    .yl-plan__list,
+    .yl-plan__tiers {
         min-height: 0;
     }
 
-    .yl-price__foot {
+    .yl-plan__foot {
         flex-wrap: wrap;
         gap: 10px;
     }
 
-    .yl-price__note {
+    .yl-plan__note {
         margin-left: 0;
         width: 100%;
         text-align: right;
+    }
+
+    .yl-plan__shots {
+        grid-template-columns: 1fr;
+        gap: 0;
     }
 }
 </style>

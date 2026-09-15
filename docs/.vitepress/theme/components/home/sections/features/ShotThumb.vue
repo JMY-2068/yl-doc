@@ -1,17 +1,17 @@
 <template>
-    <button type="button" class="yl-shot" @click="open = true">
+    <button v-if="!failed" type="button" class="yl-shot" @click="open = true">
         <div class="yl-shot__bar">
             <span class="yl-shot__dots" aria-hidden="true"><i /><i /><i /></span>
             <span class="yl-shot__label">编辑器实际界面</span>
             <span class="yl-shot__hint">点击放大</span>
         </div>
         <div class="yl-shot__frame">
-            <img :src="src" :alt="alt" :style="pos ? { objectPosition: pos } : undefined" loading="lazy">
+            <img :src="src" :alt="alt" :style="pos ? { objectPosition: pos } : undefined" loading="lazy" @error="failed = true">
         </div>
     </button>
     <Teleport to="body">
         <Transition name="yl-shot-fade">
-            <div v-if="open" class="yl-shotbox" @click="open = false">
+            <div v-if="open && !failed" class="yl-shotbox" @click="open = false">
                 <img :src="src" :alt="alt">
                 <p v-if="caption" class="yl-shotbox__caption">{{ caption }}</p>
             </div>
@@ -24,6 +24,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue"
 
 // 各幕共用的"编辑器实际界面"窗框缩略图 + 点击放大 lightbox
 // pos：缩略图裁切的 object-position（纵向上取哪一段）
+// failed：图片缺失时整块不渲染（截图尚未提供时的降级）
 defineProps<{
     src: string
     alt?: string
@@ -32,6 +33,7 @@ defineProps<{
 }>()
 
 const open = ref(false)
+const failed = ref(false)
 
 function onKeydown(e: KeyboardEvent) {
     if (e.key === "Escape") open.value = false
@@ -122,16 +124,16 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown))
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    padding: 24px;
+    gap: 12px;
+    padding: 16px;
     background: rgba(5, 5, 8, 0.88);
     backdrop-filter: blur(6px);
     cursor: zoom-out;
 
     img {
-        max-width: min(1400px, 94vw);
-        max-height: 80vh;
-        border-radius: var(--yl-radius-lg);
+        max-width: min(1920px, 97vw);
+        max-height: 90vh;
+        border-radius: var(--yl-radius);
         border: 1px solid var(--yl-border-strong);
         box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
     }

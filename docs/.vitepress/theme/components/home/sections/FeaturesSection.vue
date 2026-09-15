@@ -9,12 +9,14 @@
         <!-- 五幕依次向下；每幕独立组件，布局左右交替 -->
         <VisualEditAct />
         <PriceSortAct />
+        <PlannerAct />
     </section>
 </template>
 
 <script setup lang="ts">
 import VisualEditAct from "./features/VisualEditAct.vue"
 import PriceSortAct from "./features/PriceSortAct.vue"
+import PlannerAct from "./features/PlannerAct.vue"
 </script>
 
 <style scoped lang="scss">
