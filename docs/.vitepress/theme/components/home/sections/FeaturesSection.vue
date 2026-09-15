@@ -10,6 +10,7 @@
         <VisualEditAct />
         <PriceSortAct />
         <PlannerAct />
+        <EquipPlanAct />
     </section>
 </template>
 
@@ -18,6 +19,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue"
 import VisualEditAct from "./features/VisualEditAct.vue"
 import PriceSortAct from "./features/PriceSortAct.vue"
 import PlannerAct from "./features/PlannerAct.vue"
+import EquipPlanAct from "./features/EquipPlanAct.vue"
 
 const root = ref<HTMLElement>()
 const head = ref<HTMLElement>()
