@@ -11,6 +11,7 @@
         <PriceSortAct />
         <PlannerAct />
         <EquipPlanAct />
+        <ThemeAct />
     </section>
 </template>
 
@@ -20,6 +21,7 @@ import VisualEditAct from "./features/VisualEditAct.vue"
 import PriceSortAct from "./features/PriceSortAct.vue"
 import PlannerAct from "./features/PlannerAct.vue"
 import EquipPlanAct from "./features/EquipPlanAct.vue"
+import ThemeAct from "./features/ThemeAct.vue"
 
 const root = ref<HTMLElement>()
 const head = ref<HTMLElement>()
