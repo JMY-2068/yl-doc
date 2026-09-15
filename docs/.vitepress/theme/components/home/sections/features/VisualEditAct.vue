@@ -3,7 +3,7 @@
         <div class="yl-act__grid">
             <!-- 左列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 01 / 05</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 01 / 06</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">可视化编辑，所见即所得</h3>
                 <p class="yl-act__desc" data-rise style="--d: 0.12s">
                     不用学习过滤语法——颜色、字号、光柱，在编辑面板里实时修改，实时预览。

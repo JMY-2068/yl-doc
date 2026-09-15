@@ -12,6 +12,7 @@
         <PlannerAct />
         <EquipPlanAct />
         <ThemeAct />
+        <CloudSyncAct />
     </section>
 </template>
 
@@ -22,6 +23,7 @@ import PriceSortAct from "./features/PriceSortAct.vue"
 import PlannerAct from "./features/PlannerAct.vue"
 import EquipPlanAct from "./features/EquipPlanAct.vue"
 import ThemeAct from "./features/ThemeAct.vue"
+import CloudSyncAct from "./features/CloudSyncAct.vue"
 
 const root = ref<HTMLElement>()
 const head = ref<HTMLElement>()

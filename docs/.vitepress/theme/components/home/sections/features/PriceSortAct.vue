@@ -70,7 +70,7 @@
 
             <!-- 右列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 02 / 05</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 02 / 06</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
                 <p class="yl-act__desc" data-rise style="--d: 0.12s">
                     命运卡、暗金、圣甲虫、卓越宝石、星团珠宝，按最新物价从高到低排序、自动分档——物价变了，分类T级跟着一键同步。

@@ -3,7 +3,7 @@
         <div class="yl-act__grid yl-act3__grid">
             <!-- 左列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 03 / 05</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 03 / 06</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">通货、宝石实时规划<span class="yl-act__badge">POE2</span></h3>
                 <p class="yl-act__desc" data-rise style="--d: 0.12s">
                     通货规划器、宝石规划器，按实时物价从高到低排序、自动分档——档位跟着当前物价走。
