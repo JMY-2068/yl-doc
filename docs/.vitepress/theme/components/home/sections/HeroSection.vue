@@ -29,6 +29,7 @@
 
             <div class="yl-hero__actions">
                 <a class="yl-btn yl-btn--primary" href="https://edit.filtereditor.cn/" target="_blank" rel="noopener">打开编辑器</a>
+                <a class="yl-btn yl-btn--ghost" href="https://mp.weixin.qq.com/s/Axm4ucwmJ6-642G8G7kQfA" target="_blank" rel="noopener">物价榜介绍</a>
                 <a class="yl-btn yl-btn--ghost" href="/download.html">下载懒人包</a>
                 <a class="yl-btn yl-btn--ghost" href="/base/intro.html">先看教程</a>
             </div>

@@ -56,7 +56,7 @@ export const teekConfig = defineTeekConfig({
     },
     // 主题增强配置，当开启后，右上角将有主题增强面板出现。
     themeEnhance: {
-        enabled: true, // 启用主题增强功能
+        enabled: false, // 启用主题增强功能
         position: "top", // 位置，top 为导航栏右侧，bottom 为右下角
         // 布局切换配置
         layoutSwitch: {
