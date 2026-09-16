@@ -1,5 +1,5 @@
 <template>
-    <div ref="root" class="yl-actcs">
+    <div id="act-save" ref="root" class="yl-actcs">
         <div class="yl-act__grid yl-actcs__grid">
             <!-- 左列：演示（mini 复刻：自定义过滤列表 + 五类差异更新弹窗） -->
             <div class="yl-act__demo">

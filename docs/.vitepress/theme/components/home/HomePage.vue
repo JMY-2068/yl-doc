@@ -13,6 +13,8 @@
             <a class="yl-home__footer-item" href="https://github.com/Kele-Bingtang/vitepress-theme-teek" target="_blank" rel="noopener"><i class="yl-home__footer-ic" aria-hidden="true" v-html="themeIcon" />Theme By Teek@{{ version }}</a>
             <a class="yl-home__footer-item" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener"><i class="yl-home__footer-ic" aria-hidden="true" v-html="icpRecordIcon" />苏ICP备2021052248号-2</a>
         </footer>
+        <!-- Waypoint 传送点导航（桌面右侧固定） -->
+        <WaypointNav />
     </div>
 </template>
 
@@ -25,6 +27,7 @@ import FeaturesSection from "./sections/FeaturesSection.vue"
 import BentoSection from "./sections/BentoSection.vue"
 import CommunitySection from "./sections/CommunitySection.vue"
 import CtaSection from "./sections/CtaSection.vue"
+import WaypointNav from "./WaypointNav.vue"
 // Teek 页脚同款图标（包内置 SVG 字符串，默认导出）
 import copyrightIcon from "vitepress-theme-teek/es/static/icons/copyright.mjs"
 import themeIcon from "vitepress-theme-teek/es/static/icons/theme.mjs"

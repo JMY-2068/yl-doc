@@ -1,5 +1,5 @@
 <template>
-    <div ref="root" class="yl-act6">
+    <div id="act-sync" ref="root" class="yl-act6">
         <div class="yl-act__grid yl-act6__grid">
             <!-- 左列：文案 -->
             <div class="yl-act__copy">

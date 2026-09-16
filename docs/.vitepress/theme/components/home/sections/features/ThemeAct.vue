@@ -1,5 +1,5 @@
 <template>
-    <div ref="root" class="yl-act5">
+    <div id="act-theme" ref="root" class="yl-act5">
         <!-- 文案横排在上：左标题块 + 右卖点 -->
         <div class="yl-act5__head">
             <div class="yl-act5__head-main">
