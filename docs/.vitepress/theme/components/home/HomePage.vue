@@ -2,6 +2,7 @@
     <div class="yl-home">
         <HeroSection />
         <SignatureSection />
+        <WhySection />
         <FeaturesSection />
         <BentoSection />
         <CommunitySection />
@@ -13,6 +14,7 @@
 import { onBeforeUnmount, onMounted } from "vue"
 import HeroSection from "./sections/HeroSection.vue"
 import SignatureSection from "./sections/SignatureSection.vue"
+import WhySection from "./sections/WhySection.vue"
 import FeaturesSection from "./sections/FeaturesSection.vue"
 import BentoSection from "./sections/BentoSection.vue"
 import CommunitySection from "./sections/CommunitySection.vue"

@@ -2,7 +2,7 @@
     <section id="bento" ref="root" class="yl-bento">
         <!-- 区块头 -->
         <div class="yl-bento__head">
-            <p class="yl-bento__kicker" data-rise>04 / BENTO</p>
+            <p class="yl-bento__kicker" data-rise>05 / BENTO</p>
             <h2 class="yl-bento__title" data-rise style="--d: 0.08s">还有更多功能...</h2>
             <p class="yl-bento__desc" data-rise style="--d: 0.14s">十二项轻量功能，覆盖编辑的每个环节。</p>
         </div>

@@ -2,7 +2,7 @@
     <section id="features" ref="root" class="yl-feat">
         <!-- 区块大标题 -->
         <div ref="head" class="yl-feat__head">
-            <p class="yl-feat__kicker" data-rise>03 / FEATURES</p>
+            <p class="yl-feat__kicker" data-rise>04 / FEATURES</p>
             <h2 class="yl-feat__head-title" data-rise style="--d: 0.08s">一乐过滤能做什么？</h2>
         </div>
 
