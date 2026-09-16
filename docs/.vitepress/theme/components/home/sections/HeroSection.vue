@@ -516,6 +516,12 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     gap: 22px;
+
+    /* 移动端：徽章一行放不下两个，改为各占一行（两行） */
+    @media (max-width: 959px) {
+        flex-direction: column;
+        gap: 8px;
+    }
 }
 
 .yl-chip {
