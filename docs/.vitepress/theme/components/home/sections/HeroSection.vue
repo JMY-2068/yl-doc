@@ -37,8 +37,8 @@
             <div class="yl-hero__stats">
                 <p class="yl-hero__count">已有 <strong id="yl-user-count">0</strong> 位流放者加入</p>
                 <div class="yl-hero__versions">
-                    <span class="yl-chip">POE1 v3.29.2</span>
-                    <span class="yl-chip">POE2 v2.0.8</span>
+                    <span class="yl-chip">POE1 v{{ poe1.v }}<em>更新于 {{ poe1.d }}</em></span>
+                    <span class="yl-chip">POE2 v{{ poe2.v }}<em>更新于 {{ poe2.d }}</em></span>
                 </div>
             </div>
         </div>
@@ -49,6 +49,7 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue"
+import { useSiteVersions } from "../composables/useSiteVersions"
 import gsap from "gsap"
 import { SplitText } from "gsap/SplitText"
 
@@ -120,6 +121,10 @@ function spawnDust(container: HTMLElement) {
         dot.style.top = `${15 + Math.random() * 75}%`
         dot.style.width = `${size}px`
         dot.style.height = `${size}px`
+        // scoped 样式够不到 JS 注入的元素，视觉样式必须内联（修复金尘一直不可见的存量 bug）
+        dot.style.background = "var(--yl-gold-bright)"
+        dot.style.borderRadius = "50%"
+        dot.style.boxShadow = "0 0 6px rgba(244, 188, 94, 0.55)"
         container.appendChild(dot)
         gsap.fromTo(dot,
             { y: 0, autoAlpha: 0 },
@@ -163,7 +168,10 @@ function animateCount(el: HTMLElement, target: number) {
     })
 }
 
+const { poe1, poe2, fetchSiteVersions } = useSiteVersions()
+
 onMounted(() => {
+    fetchSiteVersions()
     if (!root.value) return
     gsap.registerPlugin(SplitText)
     // 后台标签页/受限渲染环境下 rAF 被节流，默认 lagSmoothing 会让时间线爬行，关闭让动画按真实时间推进
@@ -512,16 +520,26 @@ onBeforeUnmount(() => {
 
 .yl-chip {
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
     gap: 8px;
     font-family: var(--yl-font-mono);
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: var(--yl-gold);
+    color: var(--yl-text-primary);
+
+    /* 更新日期：小号淡色（状态圆点仍居中于版本行） */
+    em {
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: var(--yl-text-faint);
+    }
 
     /* 状态小圆点：表意"版本在线"，与上方可点按钮明确区分 */
     &::before {
+        align-self: center;
         content: "";
         width: 7px;
         height: 7px;

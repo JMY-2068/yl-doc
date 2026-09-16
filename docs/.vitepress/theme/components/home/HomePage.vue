@@ -7,6 +7,12 @@
         <BentoSection />
         <CommunitySection />
         <CtaSection />
+        <!-- 页脚三件（版权 / 主题 / 备案）：layout:page 不带 Teek 页脚，此处镜像 teekConfig.footerInfo 与 Teek 页脚原文案（改动需两处同步）；图标/版本/主题链接复用 Teek 包内置资源 -->
+        <footer class="yl-home__footer">
+            <span class="yl-home__footer-item"><i class="yl-home__footer-ic" aria-hidden="true" v-html="copyrightIcon" />Copyright {{ yearRange }} 一乐过滤</span>
+            <a class="yl-home__footer-item" href="https://github.com/Kele-Bingtang/vitepress-theme-teek" target="_blank" rel="noopener"><i class="yl-home__footer-ic" aria-hidden="true" v-html="themeIcon" />Theme By Teek@{{ version }}</a>
+            <a class="yl-home__footer-item" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener"><i class="yl-home__footer-ic" aria-hidden="true" v-html="icpRecordIcon" />苏ICP备2021052248号-2</a>
+        </footer>
     </div>
 </template>
 
@@ -19,6 +25,16 @@ import FeaturesSection from "./sections/FeaturesSection.vue"
 import BentoSection from "./sections/BentoSection.vue"
 import CommunitySection from "./sections/CommunitySection.vue"
 import CtaSection from "./sections/CtaSection.vue"
+// Teek 页脚同款图标（包内置 SVG 字符串，默认导出）
+import copyrightIcon from "vitepress-theme-teek/es/static/icons/copyright.mjs"
+import themeIcon from "vitepress-theme-teek/es/static/icons/theme.mjs"
+import icpRecordIcon from "vitepress-theme-teek/es/static/icons/icpRecord.mjs"
+// 主题版本号：与 teekConfig 同源，主题升级自动跟随
+import { version } from "vitepress-theme-teek/es/version"
+
+// 页脚版权年份：起始 2025（同 teekConfig.createYear），跨年显示区间
+const now = new Date().getFullYear()
+const yearRange = now > 2025 ? `2025-${now}` : "2025"
 
 // 首页固定深色叙事：强制深色 + 隐藏导航栏明暗切换按钮，离开时恢复用户原有主题
 let forcedDark = false
@@ -145,5 +161,47 @@ html.yl-home-active .VPNavBarAppearance {
 html.yl-home-active .tk-notice__icon,
 html.yl-home-active .tk-right-bottom-button__button:not(.back-top) {
     display: none;
+}
+
+/* —— 页脚三件（版权 / 主题 / 备案），风格并入首页暗色 —— */
+.yl-home__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    padding: 26px var(--yl-space-content) 30px;
+    border-top: 1px dashed var(--yl-border);
+    font-size: 12px;
+    color: var(--yl-text-faint);
+    text-align: center;
+}
+
+.yl-home__footer-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--yl-text-faint);
+}
+
+a.yl-home__footer-item {
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--yl-gold-bright);
+    }
+}
+
+.yl-home__footer-ic {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    /* Teek 原图标 svg 带 width/200 属性且部分 path 无 fill，统一接管尺寸与颜色 */
+    svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+    }
 }
 </style>
