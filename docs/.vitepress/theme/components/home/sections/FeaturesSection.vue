@@ -6,8 +6,9 @@
             <h2 class="yl-feat__head-title" data-rise style="--d: 0.08s">一乐过滤能做什么？</h2>
         </div>
 
-        <!-- 五幕依次向下；每幕独立组件，布局左右交替 -->
+        <!-- 七幕依次向下；每幕独立组件，布局左右交替 -->
         <VisualEditAct />
+        <CloudSaveAct />
         <PriceSortAct />
         <PlannerAct />
         <EquipPlanAct />
@@ -19,6 +20,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue"
 import VisualEditAct from "./features/VisualEditAct.vue"
+import CloudSaveAct from "./features/CloudSaveAct.vue"
 import PriceSortAct from "./features/PriceSortAct.vue"
 import PlannerAct from "./features/PlannerAct.vue"
 import EquipPlanAct from "./features/EquipPlanAct.vue"

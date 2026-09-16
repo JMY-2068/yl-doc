@@ -3,7 +3,7 @@
         <!-- 文案横排在上：左标题块 + 右卖点 -->
         <div class="yl-act5__head">
             <div class="yl-act5__head-main">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 05 / 06</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 06 / 07</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">主题编辑器，一键全过滤换色</h3>
                 <p class="yl-act5__desc" data-rise style="--d: 0.12s">
                     扫描当前过滤的全部配色，按组圈选、批量换主题——预览不写入，满意再应用。

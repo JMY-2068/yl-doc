@@ -3,7 +3,7 @@
         <div class="yl-act__grid yl-act6__grid">
             <!-- 左列：文案 -->
             <div class="yl-act__copy">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 06 / 06</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 07 / 07</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">云过滤同步，国服一键上传</h3>
                 <p class="yl-act6__desc" data-rise style="--d: 0.12s">
                     当前编辑的过滤一键上传官网云过滤——游戏内切换即生效，多设备无缝衔接。

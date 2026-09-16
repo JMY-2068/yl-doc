@@ -1,7 +1,22 @@
 <template>
     <div ref="root" class="yl-act2">
         <div class="yl-act__grid yl-act2__grid">
-            <!-- 左列：演示（迷你物价排序，同编辑器"左参考 / 右分级"布局） -->
+            <!-- 左列：文案 -->
+            <div class="yl-act__copy">
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 03 / 07</p>
+                <h3 class="yl-act__title" data-rise style="--d: 0.06s">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
+                <p class="yl-act__desc" data-rise style="--d: 0.12s">
+                    命运卡、暗金、圣甲虫、卓越宝石、星团珠宝，按最新物价从高到低排序、自动分档——物价变了，分类T级跟着一键同步。
+                </p>
+                <ul class="yl-act__list">
+                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.18 + i * 0.08 + 's' }">
+                        <span class="yl-act__num">{{ String(i + 1).padStart(2, "0") }}</span>
+                        <span>{{ s }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 右列：演示（迷你物价排序，同编辑器"左参考 / 右分级"布局） -->
             <div class="yl-act__demo">
                 <div ref="panel" class="yl-panel yl-price" data-rise style="--d: 0.1s">
                     <div class="yl-panel__head">
@@ -66,21 +81,6 @@
                         pos="50% 8%"
                     />
                 </div>
-            </div>
-
-            <!-- 右列：文案 -->
-            <div class="yl-act__copy">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 02 / 06</p>
-                <h3 class="yl-act__title" data-rise style="--d: 0.06s">物价排序，实时物价分级<span class="yl-act__badge">POE1</span></h3>
-                <p class="yl-act__desc" data-rise style="--d: 0.12s">
-                    命运卡、暗金、圣甲虫、卓越宝石、星团珠宝，按最新物价从高到低排序、自动分档——物价变了，分类T级跟着一键同步。
-                </p>
-                <ul class="yl-act__list">
-                    <li v-for="(s, i) in listCopy" :key="i" data-rise :style="{ '--d': 0.18 + i * 0.08 + 's' }">
-                        <span class="yl-act__num">{{ String(i + 1).padStart(2, "0") }}</span>
-                        <span>{{ s }}</span>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -273,9 +273,9 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 
-/* 第二幕镜像：演示在左、文案在右 */
+/* 第三幕正向：文案在左、演示在右 */
 .yl-act2__grid {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
 }
 
 /* —— 入场：淡入 + 上浮（对齐 Hero 副标题手感，逐项延迟见 --d） —— */

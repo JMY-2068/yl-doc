@@ -3,7 +3,7 @@
         <!-- 文案横排在上：左标题块 + 右卖点 -->
         <div class="yl-act4__head">
             <div class="yl-act4__head-main">
-                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 04 / 06</p>
+                <p class="yl-act__kicker" data-rise>功能长廊 · ACT 05 / 07</p>
                 <h3 class="yl-act__title" data-rise style="--d: 0.06s">装备规划，T级精准操控<span class="yl-act__badge">POE2</span></h3>
                 <p class="yl-act4__desc" data-rise style="--d: 0.12s">
                     装备规划器——黄蓝装基底手动分 T1/T2/T3，防具按防御属性分列降序——档位标准由你定。
