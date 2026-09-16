@@ -748,5 +748,11 @@ onBeforeUnmount(() => {
         margin-left: 0;
         width: 100%;
     }
+
+    /* 底部截图移动端单列（同装备规划/规划器幕） */
+    .yl-theme__shots {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
 </style>

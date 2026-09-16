@@ -72,7 +72,7 @@ const goldPoints = [
 ]
 
 const stats = [
-    { num: "160,000+", label: "位流放者在用" },
+    { num: "160,000+", label: "位流放者使用过" },
     { num: "30+", label: "赛季持续更新" },
     { num: "2", label: "版本同步跟进（POE1 · POE2）" },
     { num: "40+", label: "公众号教程持续输出" },
