@@ -21,6 +21,18 @@ export default defineConfig({
     lang: "zh-CN",
     head: [
         ["link", { rel: "icon", type: "image/webp", href: "/logo.webp" }],
+        // 首屏防闪（首页）：JS 可用时解析期即隐藏 Hero 待入场元素，避免"静态先显示→消失→再动画"的闪屏；
+        // HomePage 挂载、GSAP 初始态就绪后由 yl-mounted 放行；主 bundle 加载失败 4s 后自动放行（无 JS 则永不隐藏）
+        [
+            "script",
+            {},
+            "document.documentElement.classList.add('yl-js');setTimeout(function(){if(!window.__ylHomeMounted)document.documentElement.classList.remove('yl-js')},4000);",
+        ],
+        [
+            "style",
+            {},
+            "html.yl-js:not(.yl-mounted) .yl-home .yl-hero__content,html.yl-js:not(.yl-mounted) .yl-home .yl-hero__scroll,html.yl-js:not(.yl-mounted) .yl-home .yl-hero__drops,html.yl-js:not(.yl-mounted) .yl-home .yl-hero__halo{visibility:hidden}",
+        ],
         ["meta", { property: "og:type", content: "website" }],
         ["meta", { property: "og:locale", content: "zh-CN" }],
         ["meta", { property: "og:title", content: "一乐过滤" }],

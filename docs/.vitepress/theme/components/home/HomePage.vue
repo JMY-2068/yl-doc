@@ -74,6 +74,9 @@ function disableThemeReducedMotionReset() {
 onMounted(() => {
     const root = document.documentElement
     root.classList.add("yl-home-active")
+    // 首屏防闪放行：HeroSection 已在本轮先挂载并设好 GSAP 初始态，此刻揭开 head 内联 CSS 的预隐藏
+    window.__ylHomeMounted = true
+    root.classList.add("yl-mounted")
     if (!root.classList.contains("dark")) {
         root.classList.add("dark")
         forcedDark = true
