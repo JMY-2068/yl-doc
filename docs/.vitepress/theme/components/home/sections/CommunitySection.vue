@@ -16,7 +16,7 @@
                         <svg viewBox="0 0 26 26"><rect x="1" y="2" width="24" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="2" /><path d="M 9 20 L 9 25 L 14 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
                     </span>
                     <h4 class="yl-comm__card-title">QQ 交流群</h4>
-                    <span class="yl-comm__chip">共 5 个群</span>
+                    <span class="yl-comm__chip">共 {{ qqGroups.length }} 个群</span>
                 </div>
                 <ul class="yl-comm__groups">
                     <li v-for="g in qqGroups" :key="g.id">
@@ -76,22 +76,17 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue"
+import { useQqGroups } from "../composables/useQqGroups"
 
 // 社区生态带（方案 C 三卡）：QQ 交流群 / 定制服务 / 微信公众号 + 社交阵地行
 // 素材全部线上直链（不进仓库）：QQ 群二维码 COS、定制/公众号取自编辑器 site 目录
-// 群号与加群链接来自旧首页；文案为占位，待用户定稿
+// 群列表来自 system 表 id=2 社区配置（编辑器管理端维护），接口无数据时用内置兜底
 
 const DZ_QR = "https://edit.filtereditor.cn/site/%E5%AE%9A%E5%88%B6.png"
 const GZH_QR = "https://edit.filtereditor.cn/site/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg"
 
 // full 为独立的降透明度标记，与 tag 文案解耦
-const qqGroups = [
-    { id: "663896689", tag: "活跃聊天 已满", full: true, link: "https://qm.qq.com/q/r5NmIj4XTM" },
-    { id: "225616278", tag: "潜水下载", full: false, link: "https://qm.qq.com/q/utSaj5dfNu" },
-    { id: "621055124", tag: "潜水下载", full: false, link: "https://qm.qq.com/q/wT190TKwJq" },
-    { id: "495451331", tag: "活跃聊天 已满", full: true, link: "https://qm.qq.com/q/KAsjF2w0A8" },
-    { id: "476921399", tag: "潜水下载", full: false, link: "https://qm.qq.com/q/mrL90bDCLe" },
-]
+const { qqGroups, fetchQqGroups } = useQqGroups()
 
 const socials = [
     { label: "踩蘑菇论坛", link: "https://www.caimogu.cc/user/1083041.html" },
@@ -115,6 +110,7 @@ function riseIn() {
 }
 
 onMounted(() => {
+    fetchQqGroups()
     if (!root.value) return
     root.value.classList.add("js-anim")
     io = new IntersectionObserver(
