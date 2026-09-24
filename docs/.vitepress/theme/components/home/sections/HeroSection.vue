@@ -1,5 +1,7 @@
 <template>
     <section id="hero" ref="root" class="yl-hero">
+        <!-- 蒙层地图：整屏铺底的地图截图，低透明度压暗作底纹；底部渐隐，避免与下一区块出现硬切边 -->
+        <div class="yl-hero__map" aria-hidden="true"></div>
         <!-- 光锚定在品牌组合正后方的小光晕 + 上浮金尘粒子（JS 注入） -->
         <div class="yl-hero__halo" aria-hidden="true"></div>
         <div ref="dust" class="yl-hero__dust" aria-hidden="true"></div>
@@ -189,7 +191,8 @@ onMounted(() => {
         if (dust.value) spawnDust(dust.value)
 
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } })
-        tl.from(q(".yl-hero__logo"), { autoAlpha: 0, scale: 0.7, y: 24, duration: 0.7 })
+        tl.from(q(".yl-hero__map"), { autoAlpha: 0, duration: 1.2 }, 0)
+            .from(q(".yl-hero__logo"), { autoAlpha: 0, scale: 0.7, y: 24, duration: 0.7 })
             .from(split.chars, { autoAlpha: 0, y: 80, duration: 0.9, stagger: 0.06 }, "-=0.35")
             .from(q(".yl-hero__underline"), { scaleX: 0, duration: 0.7, ease: "expo.inOut", transformOrigin: "center center" }, "-=0.45")
             .from(q(".yl-hero__subtitle"), { autoAlpha: 0, y: 24, duration: 0.7 }, "-=0.35")
@@ -258,6 +261,16 @@ onBeforeUnmount(() => {
     min-height: calc(100svh - 64px);
     padding: 96px var(--yl-space-content) 88px;
     overflow: clip;
+}
+
+.yl-hero__map {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: url("/assets/other/poe1-poe2.webp") center / cover no-repeat;
+    opacity: 0.1;
+    mask-image: linear-gradient(to bottom, #000 0, #000 70%, transparent 100%);
+    pointer-events: none;
 }
 
 .yl-hero__halo {
