@@ -24,7 +24,7 @@
     --vp-c-brand-1: #e6a23c;
     --vp-c-brand-2: #edb776;
     --vp-c-brand-3: #f2d19d;
-    --vp-c-brand-soft: #faecd8;
+    --vp-c-brand-soft: #463b2b;
     --vp-home-hero-image-background-image: linear-gradient(135deg, #FFE0B2 25%, #FFCC80 50%, #FFB74D 75%);
     --vp-home-hero-image-filter: blur(72px);
 }
@@ -38,7 +38,7 @@ body {
     --vp-c-brand-1: #e6a23c;
     --vp-c-brand-2: #edb776;
     --vp-c-brand-3: #f2d19d;
-    --vp-c-brand-soft: #faecd8;
+    --vp-c-brand-soft: #463b2b;
     --vp-home-hero-image-background-image: linear-gradient(135deg, #8B6914 25%, #B8860B 50%, #DAA520 75%);
 }
 

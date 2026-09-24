@@ -18,6 +18,8 @@ export default defineConfig({
     description: "一乐过滤 — Path of Exile 滤镜工具",
     cleanUrls: false,
     lastUpdated: true,
+    // 全站强制暗色：忽略系统偏好与本地记录，切换按钮自动隐藏（appearance:false 是强制浅色，别用错）
+    appearance: "force-dark",
     lang: "zh-CN",
     head: [
         ["link", { rel: "icon", type: "image/webp", href: "/logo.webp" }],
